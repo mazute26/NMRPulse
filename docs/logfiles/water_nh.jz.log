@@ -1,0 +1,45 @@
+Date and Time: 2018-03-01 15:19:30.525582 
+PP_FILE CREATE: destfile </Users/mazute26/Documents/PP_SETUP/topspinhome/exp/stan/nmr/lists/pp/user/water_nh.jz> from sourcefile <pp/user/water_nh.jz>
+PULPROG: water_nh.jz
+SFO1: 600.13281495
+P 1: 6.47
+PLW 1: 19.9526231497
+P 2: 785.65
+PLW 2: 0.00125892541179
+PP_FILE NO_ACTION: sourcefile <wave/user/sinc1.0> equals destfile </Users/mazute26/Documents/PP_SETUP/topspinhome/exp/stan/nmr/lists/wave/user/sinc1.0>
+P 3: 1897.0
+SPW 1: 0.00251188643151
+SPNAM 1: sinc1.0
+SPOFFS 1: 0
+SFO3: 150.92909791
+PP_FILE CREATE: destfile </Users/mazute26/Documents/PP_SETUP/topspinhome/exp/stan/nmr/lists/f1/water_nh.jz> from sourcetext
+FQ4LIST: water_nh.jz
+P 5: 52.9882706091
+PLW 5: 11.4866198431
+SFO2: 60.8177206695
+P 7: 40.0
+PLW 7: 208.929613085
+PP_FILE NO_ACTION: sourcefile <cpd/user/waltz16.31> equals destfile </Users/mazute26/Documents/PP_SETUP/topspinhome/exp/stan/nmr/lists/cpd/user/waltz16.31>
+P 31: 200.0
+PLW 31: 8.31763771103
+CPDPRG 2: waltz16.31
+PP_FILE NO_ACTION: sourcefile <gp/SINE.20> equals destfile </Users/mazute26/Documents/PP_SETUP/topspinhome/exp/stan/nmr/lists/gp/SINE.20>
+GPNAM 0: SINE.20
+GPX 0: 50
+GPY 0: 0
+GPZ 0: 20
+PP_FILE NO_ACTION: sourcefile <gp/SINE.20> equals destfile </Users/mazute26/Documents/PP_SETUP/topspinhome/exp/stan/nmr/lists/gp/SINE.20>
+GPNAM 1: SINE.20
+GPX 1: 0
+GPY 1: 0
+GPZ 1: 50
+P 10: 3000
+P 11: 2000
+P 12: 400
+IN 0: 0.0003
+L 3: 200
+1 TD: 400
+1 SI: 512
+DW: 5.39880492999e-05
+TD: 1024
+SI: 2048

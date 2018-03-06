@@ -1,0 +1,33 @@
+; 60.8162770 old 600; 60.809676 599; 79.11 ppm
+; calib for 15n high and low power o3=6270
+;1D sequence
+
+
+#include "bits.sg"
+;#define SHAPE
+"acqt0=0"
+"d2=5.5m-p3"
+
+1 ze
+  1m
+2 d1 pl3:N pl1:H
+  p1 ph1
+  d2
+#ifdef SHAPE
+  (p3:sp0 ph2):N
+#else
+  (p3 ph2):N
+#endif
+  go=2 ph31
+  wr #0
+exit
+
+ph1=0
+ph2=0
+ph3=0 2
+ph31=0 2
+
+;PL7 n15 channel power level PL2=-2 -> p90~35us
+;p1 = 90 degree proton at pl1 power level
+;d1 relaxation delay
+;d2=5.5msec

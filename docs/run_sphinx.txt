@@ -1,0 +1,2 @@
+$python -m sphinx.apidoc -f -o source/ ../py
+$make html

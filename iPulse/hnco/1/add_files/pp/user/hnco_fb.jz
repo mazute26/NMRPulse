@@ -1,0 +1,236 @@
+#include "bits.sg"
+
+;hnco_fb.sg
+#define CARBONYL
+#define NITROGEN
+;#define TEST_1D
+#define ON
+
+
+;history
+;written on 10/23/91
+;used for sg hncoct/8 10/23/91
+;interchanged f2 and f3 6/12/92
+;used for gv 
+;put in NH2 purge pulse ph22 7/17/92
+;put additional +/- on last nitrogen 90 pulse 7/17/92
+;used for jacob calcineurin 7/17/92
+;changed to hnco_fb.sg 9/1/94 included flip-back
+;used on NEF hncoct/10 SG 9/1/94
+;Changed to DMX 12/12/95 NT
+;run on DMX500 12/27/95 SG
+;installed on dmx at roche basel jan/1996
+
+
+;f1 = hydrogen frequency on water
+;p1:            proton 90 at pl1
+;p2:            proton 90 1ms at pl2 for watergate and first water flip-back pulse
+;p13:           proton 90 sinc1.0 sp0 for second water flip-back pulse
+;p30:           dipsi 90 at pl30 ca. 50u (dipsi-2.30)
+
+
+;f2 = carbon frequency at carbonyl resonance (177 ppm)
+"p5=53u"        ;carbonyl 90 at pl5     (63.7u at 500MHz)
+                ;produces 360 degree pulse on carbon alpha
+"p6=162.2u"     ;carbonyl 180 at pl6    (194.6u at 500MHz)
+                ;at sp3 used as shaped pulse centered at carbon alpha (56 ppm)
+                ;with off-resonance offset 177 ppm - 56 ppm
+                ;produces n*360 degree pulse on carbon alpha
+
+;f3 = nitrogen frequency
+;p7=nitrogen 90 at pl7:N
+;p31=nitrogen 90 at pl31 for waltz16 decoupling (waltz16.31)
+
+
+
+#ifdef CARBONYL
+"d0=in0*0.5 -p5*0.637 -p6*0.5-1u"
+#else
+"d0=4u"
+#endif
+
+;d1=1.0s        ;relaxation delay
+;d7 ca 100u = dw
+"d11=50m"
+"d12=7m"        ;universal dd,ip delay
+
+"d15=p1"                ;used for timing instead of c8
+"d16=5.4m"              ;refocus HN-N for NH
+;"d16=3m"               ;refocus HN-N for NH2 + NH, but you loose sqrt(2)
+"d17=10m-d16"
+
+"d22=13.6m"
+"d21=6u"
+"d23=d22+d21+p6"
+"d24=p6+d22-d16-6u-p1"
+
+
+;in21=in23=1/(2sw)
+;l4=d23/in23
+
+"d25=p6*0.5-p7" ;p6*0.5 > p7
+"d26=p7-p1"
+
+
+;-------------- Gradient pulses -----------------
+;you have to set them by hand because of those $$@! heads
+"p20=1.0m"              ;gp1=-50%
+"p21=1.0m"              ;gp1=-50%
+"p22=0.4m"              ;gp1=-50%
+"p23=1.5m"              ;gp1=-50%
+
+
+
+        ze
+2       d11  do:N
+#ifdef CARBONYL
+        d12
+3       d12*2
+4       d12
+#endif
+#ifdef NITROGEN
+        d12
+5       d12*3
+6       10u
+        50m do:N
+#endif
+;*******        KILLER-PULSES           *******
+        1m LOCK_ON
+        d1 pl7:N
+        4u pl5:C1
+        20u pl1:f1
+        1m LOCK_OFF
+        (p7 ph10):N (p5 ph20):C1
+        p20:gp1         ;GRAD(33, POSITIV, 20 )
+        2m
+#ifdef ON
+;*******        start 90-degree         *******
+        p1 ph0
+        2.25m
+        (d26 p1*2 ph1) (p7*2 ph2):N
+        2.25m
+        (p1 ph2) 
+        2u
+        50u pl2:f1
+        (p2 ph24:r)     ;water flip-back using soft pulse
+        2u
+        p20:gp1         ;GRAD( 10, POSITIV, 20 )
+        2m pl1:f1
+        (p7 ph3):N
+;*******        n15 evolution           *******
+        (d16 p1 ph26 2u 4u pl30 d24 cpds1 d21):f1 (d21 p6:sp3 ph20 d22):C1      ;p6 on ca
+        10u pl6:C1
+        (d25 p7*2 ph5):N (p6 ph6):C1                                            ;p6 on co
+        10u
+        d23 pl5:C1
+        (p7 ph7):N 
+        4u do:f1        ;dipsi interrupted (because of p23 gradient)
+        4u pl1:f1
+        (p1 ph27)       ;1h magnetization to z-axis
+        p23:gp1
+        1.5m
+        (p1 ph26):f1    ;1h magnetization back to x-axis
+        4u pl30:f1
+        10u cpds1:f1    ;dipsi continued
+        (p5 ph4):C1
+
+#ifdef CARBONYL
+;*******        carbonyl evolution      *******
+        d0      ;t1/2
+;*******        carbon alpha 180 by off-res shaped pulse
+        (p7*2 ph10):N  (p6:sp3 ph22):C1
+        2u
+        d0 pl5:C1
+#else 
+        4u
+#endif
+        (p5 ph20):C1 
+        (p7 ph10):N
+        4u
+        4u
+        d15             ;p1:c8
+        10m pl6:C1
+        (d25 p7*2 ph10):N (p6 ph20):C1 
+        d17 
+        4u do:f1        ;dipsi off
+        4u pl1:f1
+        (p1 ph27)
+        d16     
+        (p7 ph0):N
+        5u
+        p21:gp1         ;GRAD( 40, POSITIV, 30 )
+        3m
+        5u
+        (p13:sp0 ph25):f1       ;water flip-back using sinc1.0 pulse
+        2u
+        2u
+        50u pl1:f1
+        (p1 ph0) 
+;*******        watergate               *******
+        5u
+        p22:gp1         ;GRAD( 50, POSITIV, 8.0 )
+        950u pl2:f1
+        76u
+        (p2 ph24:r)             ;watergate soft pulse
+        2u
+        5u pl1:f1
+        (p1*2 ph0)
+        2u
+        5u pl2:f1
+        (p7*2 ph10):N (p2 ph24:r)       ;watergate soft pulse
+        2u
+        p22:gp1         ;GRAD( 51, POSITIV, 8.0 )
+        10u pl31:N
+#endif
+#ifndef TEST_1D
+        950u    
+go=2 ph31 cpds3:N
+5u do:N
+d11 wr #0 if #0 zd
+
+#ifdef CARBONYL
+d12 ip4
+lo to 3 times 2
+d12 id0
+d12 ip31*2
+lo to 4 times l3
+d12 rd0
+#endif
+#ifdef NITROGEN
+d12 ip3
+lo to 5 times 2
+d12 id21
+d12 dd23
+d12 ip31*2
+lo to 6 times l4
+#endif
+#else
+        950u pl1:f1
+        lo to 2 times l5
+        d1
+        p1 ph31
+        go=2 ph31
+        d11 wr #0
+#endif
+1m do:N
+10u LOCK_ON
+exit
+
+ph0=0
+ph1=1
+ph2=1
+ph3=0 0 2 2
+ph4=0 2
+ph5=0
+ph6=0
+ph7=0
+ph10=0
+ph20=0
+ph21=0
+ph22=0
+ph24=2  ;adjusted -x at pl2
+ph25=(3600) 1850        ;adjusted -x at sp0 phcor25 doesn't work
+ph26=(360)90    ;adjusted y for pl1 relativ to pl30
+ph27=(360)270   ;adjusted -y for pl1 relativ to pl30
+ph28=2
+ph31=0 2 2 0

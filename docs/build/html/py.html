@@ -1,0 +1,537 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>py package &#8212; PPlib alpha documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="py-package">
+<h1>py package<a class="headerlink" href="#py-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="py-topcmds-module">
+<h2>py.TopCmds module<a class="headerlink" href="#py-topcmds-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-py.a_f">
+<span id="py-a-f-module"></span><h2>py.a_f module<a class="headerlink" href="#module-py.a_f" title="Permalink to this headline">¶</a></h2>
+<p>This module contains routines to create the add_files directory tree from
+the acqus file.</p>
+<dl class="function">
+<dt id="py.a_f.copy_parfile">
+<code class="descclassname">py.a_f.</code><code class="descname">copy_parfile</code><span class="sig-paren">(</span><em>ptype</em>, <em>pname</em>, <em>addfilecreatepath</em><span class="sig-paren">)</span><a class="headerlink" href="#py.a_f.copy_parfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy individual parameter file &lt;pname&gt; of type &lt;ptype&gt; to
+&lt;addfilecretepath&gt;. &lt;pname&gt; is sought according to the Bruker search path.
+The file is copied into a subdirectory of &lt;addfilecretepath&gt; according to
+the relative directory in the Bruker lists directory. In case the file comes
+from outside of the lists directory (non-standard Bruker path), the file
+is put into the first subdirectory entry of lists according to the standard
+search path.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="py.a_f.main">
+<code class="descclassname">py.a_f.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#py.a_f.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="py.a_f.make_add_files">
+<code class="descclassname">py.a_f.</code><code class="descname">make_add_files</code><span class="sig-paren">(</span><em>u_dc</em>, <em>addfilecreatepath</em><span class="sig-paren">)</span><a class="headerlink" href="#py.a_f.make_add_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create add_files directory into addfilecreatepath. An eventually existing
+previous directory is removed.
+The routine runs through the list of parameter names defined in
+the pp.dirs2pars_dict dictionnary. The parameter values are read out
+from the acqu file dictionnary u_dc. A list of unique parameter names and
+values is created, which are then passed individually to copy_parfile
+together with the addfilecreatpath.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="py.a_f.printhelp">
+<code class="descclassname">py.a_f.</code><code class="descname">printhelp</code><span class="sig-paren">(</span><em>com</em><span class="sig-paren">)</span><a class="headerlink" href="#py.a_f.printhelp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create add_files directory</p>
+<p>usage: %s [options] [acqus filename]</p>
+<p>acqus filename: name of acqu(s) input file [acqus]</p>
+<p>[options]:
+-a      : change to current data set on Bruker instrument (uses output of command ‘curd -a’)
+-d name : define name of add_files directory [add_files]
+-h      : print this text
+-v num  : verbose level number [0]</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-py.fcalc">
+<span id="py-fcalc-module"></span><h2>py.fcalc module<a class="headerlink" href="#module-py.fcalc" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="py.fcalc.csWater45Me_308K_p">
+<code class="descclassname">py.fcalc.</code><code class="descname">csWater45Me_308K_p</code><span class="sig-paren">(</span><em>p=1</em><span class="sig-paren">)</span><a class="headerlink" href="#py.fcalc.csWater45Me_308K_p" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="py.fcalc.cs_water_T">
+<code class="descclassname">py.fcalc.</code><code class="descname">cs_water_T</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#py.fcalc.cs_water_T" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="py.fcalc.cs_water_Tp">
+<code class="descclassname">py.fcalc.</code><code class="descname">cs_water_Tp</code><span class="sig-paren">(</span><em>T=298</em>, <em>p=1</em><span class="sig-paren">)</span><a class="headerlink" href="#py.fcalc.cs_water_Tp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="py.fcalc.f2p_water">
+<code class="descclassname">py.fcalc.</code><code class="descname">f2p_water</code><span class="sig-paren">(</span><em>freqN</em>, <em>typeN</em>, <em>freqW</em>, <em>csw</em><span class="sig-paren">)</span><a class="headerlink" href="#py.fcalc.f2p_water" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="py.fcalc.p2f_water">
+<code class="descclassname">py.fcalc.</code><code class="descname">p2f_water</code><span class="sig-paren">(</span><em>csN</em>, <em>typeN</em>, <em>freqW</em>, <em>csw</em><span class="sig-paren">)</span><a class="headerlink" href="#py.fcalc.p2f_water" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-py.p2f">
+<span id="py-p2f-module"></span><h2>py.p2f module<a class="headerlink" href="#module-py.p2f" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="py.p2f.main">
+<code class="descclassname">py.p2f.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#py.p2f.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-py.ppAnalyze">
+<span id="py-ppanalyze-module"></span><h2>py.ppAnalyze module<a class="headerlink" href="#module-py.ppAnalyze" title="Permalink to this headline">¶</a></h2>
+<p>This module contains routines to analyse existing pulse programs together
+with their acquisition data files to make suggestions for programming the used
+parameters in the python header of the new pulse programs.</p>
+<dl class="function">
+<dt id="py.ppAnalyze.analyzepp">
+<code class="descclassname">py.ppAnalyze.</code><code class="descname">analyzepp</code><span class="sig-paren">(</span><em>progfilename</em>, <em>parfilename</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppAnalyze.analyzepp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analyze pulse program &lt;progfilename&gt; using acqu file &lt;parfilename&gt;.
+Outputs the acquisition parameters and their value.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="py.ppAnalyze.main">
+<code class="descclassname">py.ppAnalyze.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#py.ppAnalyze.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-py.ppDataset">
+<span id="py-ppdataset-module"></span><h2>py.ppDataset module<a class="headerlink" href="#module-py.ppDataset" title="Permalink to this headline">¶</a></h2>
+<p>This module plays around with the Datasets of BRUKER Topspin</p>
+<dl class="function">
+<dt id="py.ppDataset.check_if_dataset">
+<code class="descclassname">py.ppDataset.</code><code class="descname">check_if_dataset</code><span class="sig-paren">(</span><em>pp_file</em>, <em>dataset_dir='/opt/topspin/data/mazute26/nmr'</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppDataset.check_if_dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Goes trough dataset_dir and checks if a experiment directory named pp_file already exists</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="py.ppDataset.get_highest_expno">
+<code class="descclassname">py.ppDataset.</code><code class="descname">get_highest_expno</code><span class="sig-paren">(</span><em>pp_file</em>, <em>dataset_dir='/opt/topspin/data/mazute26/nmr'</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppDataset.get_highest_expno" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the highstes expno of a given experiment pp_file</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="py.ppDataset.main">
+<code class="descclassname">py.ppDataset.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#py.ppDataset.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="py-ppexpsetupgui-module">
+<h2>py.ppExpSetupGUI module<a class="headerlink" href="#py-ppexpsetupgui-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-py.ppGlobals">
+<span id="py-ppglobals-module"></span><h2>py.ppGlobals module<a class="headerlink" href="#module-py.ppGlobals" title="Permalink to this headline">¶</a></h2>
+<p>This module contains all the globals for pp.
+This is mostly Bruker parameter definitions and paths.
+A proper documentation should be written.</p>
+<dl class="function">
+<dt id="py.ppGlobals.many2many_dicts">
+<code class="descclassname">py.ppGlobals.</code><code class="descname">many2many_dicts</code><span class="sig-paren">(</span><em>m2mlist</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppGlobals.many2many_dicts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mapps obejcts from one list to the other list and vice versa.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>m2mlist: list of 2lists [list1i, list2i] where list1i, list2i represent
+a many to many mapping</dd>
+<dt>Returns:</dt>
+<dd>(one2two, two2one) : one2two, two2one
+dictionaries from elements of list1i to list2i and vice versa</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="py.ppGlobals.read_parfile_dirs_props">
+<code class="descclassname">py.ppGlobals.</code><code class="descname">read_parfile_dirs_props</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppGlobals.read_parfile_dirs_props" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Reads BRUKER parfile-dirs.prop file to in order to get correct mapping</dt>
+<dd>of the topspin parameters.</dd>
+<dt>Args:</dt>
+<dd>filename: input Bruker parfile-dirs.prop file</dd>
+<dt>Returns:</dt>
+<dd>A dict mapping parameter classes to the their respective directory.
+E.g. {‘PY_DIRS’: [‘py/user’, ‘py’]}</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-py.ppSetup">
+<span id="py-ppsetup-module"></span><h2>py.ppSetup module<a class="headerlink" href="#module-py.ppSetup" title="Permalink to this headline">¶</a></h2>
+<p>This is the module/program which sets the parameters on the spectrometer</p>
+<dl class="function">
+<dt id="py.ppSetup.PP_PUTPAR">
+<code class="descclassname">py.ppSetup.</code><code class="descname">PP_PUTPAR</code><span class="sig-paren">(</span><em>name</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppSetup.PP_PUTPAR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="py.ppSetup.PUTPARS">
+<code class="descclassname">py.ppSetup.</code><code class="descname">PUTPARS</code><span class="sig-paren">(</span><em>nams</em>, <em>vals</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppSetup.PUTPARS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="py.ppSetup.main">
+<code class="descclassname">py.ppSetup.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#py.ppSetup.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="py.ppSetup.printhelp">
+<code class="descclassname">py.ppSetup.</code><code class="descname">printhelp</code><span class="sig-paren">(</span><em>com</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppSetup.printhelp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set-up Bruker data set according to Python definitions in pulse program file</p>
+<p>usage: %s [options] programname</p>
+<p>programname: name of pulse program</p>
+<p>[options]:
+-a      : look for programname in add_files path
+-h      : print this text
+-r flag : set run flag to &lt;flag&gt; (ca be DRY, NORMAL, FORCE, INTERACTIVE) [DRY]
+-v num  : set verbose level number to &lt;num&gt;</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="py.ppSetup.write_bruker_search_path">
+<code class="descclassname">py.ppSetup.</code><code class="descname">write_bruker_search_path</code><span class="sig-paren">(</span><em>ftype</em>, <em>destfile</em>, <em>sourcefile=None</em>, <em>sourcetext=None</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppSetup.write_bruker_search_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Will copy a file from sourcefile (out of the add_files directory) or
+text to destfile in first directory of Bruker search path for
+ftype = cpd, f1, gp, … with checks for overwrite, identity, etc.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-py.ppSpect">
+<span id="py-ppspect-module"></span><h2>py.ppSpect module<a class="headerlink" href="#module-py.ppSpect" title="Permalink to this headline">¶</a></h2>
+<p>This module sets all the spectrometer-specific parameters, such as
+frequencies, pulse powers, etc</p>
+<dl class="function">
+<dt id="py.ppSpect.get_pulse_power">
+<code class="descclassname">py.ppSpect.</code><code class="descname">get_pulse_power</code><span class="sig-paren">(</span><em>nuc</em>, <em>pulse</em>, <em>length</em>, <em>nearby=False</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppSpect.get_pulse_power" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates pulse power based on spectrometer calibration set in
+dict PULSE_POWER</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">nuc: Nucleus
+pulse: pulse type
+nearby: If nearby = True then the closest value in the dict is used.</p>
+<blockquote class="last">
+<div>Otherwise the pulse power is extrapolated from the closest value.</div></blockquote>
+</dd>
+<dt>Returns:</dt>
+<dd>A tupel (pulse length in microns, pulse power in -dBW)</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-py.ppUtil">
+<span id="py-pputil-module"></span><h2>py.ppUtil module<a class="headerlink" href="#module-py.ppUtil" title="Permalink to this headline">¶</a></h2>
+<p>This module contains utility routines for the pp project.</p>
+<dl class="function">
+<dt id="py.ppUtil.cd_curd">
+<code class="descclassname">py.ppUtil.</code><code class="descname">cd_curd</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#py.ppUtil.cd_curd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether this is in topspin environment.
+In this case, change to current data set. Else do nothing.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="py.ppUtil.cmp_text_file">
+<code class="descclassname">py.ppUtil.</code><code class="descname">cmp_text_file</code><span class="sig-paren">(</span><em>text</em>, <em>file</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppUtil.cmp_text_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns True when text and file content are identical</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="py.ppUtil.find_file_dir">
+<code class="descclassname">py.ppUtil.</code><code class="descname">find_file_dir</code><span class="sig-paren">(</span><em>filename</em>, <em>dirs_type</em>, <em>addfiles=False</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppUtil.find_file_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find file &lt;filename&gt; in search path defined in
+pp.parfile_dirs_dict (addfiles=False) or
+pp.parfile_dirs_default_dict (addfiles=True) under the key &lt;dirs_type&gt;.
+Returns:</p>
+<blockquote>
+<div>(filepath, dirpath)
+filepath: absolute path to file name if file exists (else None)
+dirpath: absolute path to first directory in search path to write
+new file</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="py.ppUtil.flist_to_Bruker_flist">
+<code class="descclassname">py.ppUtil.</code><code class="descname">flist_to_Bruker_flist</code><span class="sig-paren">(</span><em>fs</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppUtil.flist_to_Bruker_flist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts frequency list to Bruker frequency list
+Args:</p>
+<blockquote>
+<div>fs: List with frequencies in MHz</div></blockquote>
+<dl class="docutils">
+<dt>Return:</dt>
+<dd>s: Bruker compatible frequency list.</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="py.ppUtil.merge_dicts">
+<code class="descclassname">py.ppUtil.</code><code class="descname">merge_dicts</code><span class="sig-paren">(</span><em>*dict_args</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppUtil.merge_dicts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given any number of dicts, shallow copy and merge into a new dict,
+precedence goes to key value pairs in later dicts:
+z = merge_dicts(a, b, c, d, e, f, g)
+i.e. key value pairs in g will take precedence over dicts a to f,
+and so on.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="py.ppUtil.putcomment">
+<code class="descclassname">py.ppUtil.</code><code class="descname">putcomment</code><span class="sig-paren">(</span><em>comment</em>, <em>verbosethreshold=1</em>, <em>ornament=True</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppUtil.putcomment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print comment if above the verbose threshold
+with ornament (ornament = True)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="py.ppUtil.read_file">
+<code class="descclassname">py.ppUtil.</code><code class="descname">read_file</code><span class="sig-paren">(</span><em>file</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppUtil.read_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>reads file</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="py.ppUtil.show_vars">
+<code class="descclassname">py.ppUtil.</code><code class="descname">show_vars</code><span class="sig-paren">(</span><em>scope</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppUtil.show_vars" title="Permalink to this definition">¶</a></dt>
+<dd><p>shows variables in scope</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="py.ppUtil.split_python_text">
+<code class="descclassname">py.ppUtil.</code><code class="descname">split_python_text</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppUtil.split_python_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>splits first ‘#ifdef PYTHON_SETUP … #endif python section from text
+Returns:</p>
+<blockquote>
+<div>(pythontext, nonpythontext)</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="py.ppUtil.strip_comment">
+<code class="descclassname">py.ppUtil.</code><code class="descname">strip_comment</code><span class="sig-paren">(</span><em>text</em>, <em>commentid</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppUtil.strip_comment" title="Permalink to this definition">¶</a></dt>
+<dd><p>strips all text from lines in text after commentid</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="py.ppUtil.write_text_file">
+<code class="descclassname">py.ppUtil.</code><code class="descname">write_text_file</code><span class="sig-paren">(</span><em>text</em>, <em>file</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppUtil.write_text_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>(over)writes text to file</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-py.showJcamp">
+<span id="py-showjcamp-module"></span><h2>py.showJcamp module<a class="headerlink" href="#module-py.showJcamp" title="Permalink to this headline">¶</a></h2>
+<p>Jcamp file parser</p>
+<dl class="function">
+<dt id="py.showJcamp.is_Jcamp">
+<code class="descclassname">py.showJcamp.</code><code class="descname">is_Jcamp</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#py.showJcamp.is_Jcamp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return true if the given filename is a Jcamp file.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="py.showJcamp.main">
+<code class="descclassname">py.showJcamp.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#py.showJcamp.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="py.showJcamp.parseJcamptxt">
+<code class="descclassname">py.showJcamp.</code><code class="descname">parseJcamptxt</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="headerlink" href="#py.showJcamp.parseJcamptxt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses Jcamp text
+Returns:</p>
+<blockquote>
+<div>(j_dc, u_dc)
+j_dc: dictionary of jcamp-defined variable name, value pairs
+(see McDonald, R. S.; Wilks, P. A. Appl. Spectrosc., AS 1988, 42 (1), 151.)
+u_dc: dictionary of user-defined variable name, value pairs,
+The variable names start with a $-sign, which is removed. If the value
+is an array, it is parsed using Bruker convention and returned as a list.
+The array start and end indices are stored as tuples into a
+subdictionnary $ARRAY under the array name.</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="py.showJcamp.parsearray">
+<code class="descclassname">py.showJcamp.</code><code class="descname">parsearray</code><span class="sig-paren">(</span><em>ar</em>, <em>li</em><span class="sig-paren">)</span><a class="headerlink" href="#py.showJcamp.parsearray" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recursevly parses a string ar containing a Bruker array into a list of values.
+The first value is separated from ar and parsed. The recursion restarts with</p>
+<blockquote>
+<div>the list li appended by the first parsed value and the remainder of ar.
+Enclosing &lt;&gt; are removed from strings</div></blockquote>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>li: list of parsed values</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="py.showJcamp.parsebrukervalue">
+<code class="descclassname">py.showJcamp.</code><code class="descname">parsebrukervalue</code><span class="sig-paren">(</span><em>val</em><span class="sig-paren">)</span><a class="headerlink" href="#py.showJcamp.parsebrukervalue" title="Permalink to this definition">¶</a></dt>
+<dd><p>parses the bruker value (variable name starting with $)
+decides whether it is an array
+Returns:</p>
+<blockquote>
+<div>(val1, ar)
+ar = (starindex, endindex) for arrays, otherwise None
+val = list of values for arrays, otherwise single value
+values are converted to int, float, or str.
+Enclosing &lt;&gt; are removed from strings.</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="py.showJcamp.parsevalue">
+<code class="descclassname">py.showJcamp.</code><code class="descname">parsevalue</code><span class="sig-paren">(</span><em>val</em><span class="sig-paren">)</span><a class="headerlink" href="#py.showJcamp.parsevalue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="py.showJcamp.printJcamp">
+<code class="descclassname">py.showJcamp.</code><code class="descname">printJcamp</code><span class="sig-paren">(</span><em>j_dc</em>, <em>u_dc</em><span class="sig-paren">)</span><a class="headerlink" href="#py.showJcamp.printJcamp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="py.showJcamp.printarraylist">
+<code class="descclassname">py.showJcamp.</code><code class="descname">printarraylist</code><span class="sig-paren">(</span><em>u_dc</em><span class="sig-paren">)</span><a class="headerlink" href="#py.showJcamp.printarraylist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="py.showJcamp.printhelp">
+<code class="descclassname">py.showJcamp.</code><code class="descname">printhelp</code><span class="sig-paren">(</span><em>com</em><span class="sig-paren">)</span><a class="headerlink" href="#py.showJcamp.printhelp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show content of Jcamp file</p>
+<p>usage: %s [options] JcampName [parlist]</p>
+<p>JcampName: name of Jcamp input file</p>
+<dl class="docutils">
+<dt>[parlist]: comma-separated list of parameters: par_1, par_2, … If not given, all parameters are listed</dt>
+<dd>only applies to user-defined parameters in Jcamp file
+par_i: single_parameter_name | parameter_array_name | parameter_array_name array_index</dd>
+</dl>
+<p>[options]:
+-a     : print only user array names and indices
+-h     : print this text
+-v num : verbose level number</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="py.showJcamp.printpar">
+<code class="descclassname">py.showJcamp.</code><code class="descname">printpar</code><span class="sig-paren">(</span><em>par</em>, <em>u_dc</em><span class="sig-paren">)</span><a class="headerlink" href="#py.showJcamp.printpar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="py-slp-module">
+<h2>py.slp module<a class="headerlink" href="#py-slp-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="id1">
+<h2>py.slp\ module<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-py">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-py" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">py package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#py-topcmds-module">py.TopCmds module</a></li>
+<li><a class="reference internal" href="#module-py.a_f">py.a_f module</a></li>
+<li><a class="reference internal" href="#module-py.fcalc">py.fcalc module</a></li>
+<li><a class="reference internal" href="#module-py.p2f">py.p2f module</a></li>
+<li><a class="reference internal" href="#module-py.ppAnalyze">py.ppAnalyze module</a></li>
+<li><a class="reference internal" href="#module-py.ppDataset">py.ppDataset module</a></li>
+<li><a class="reference internal" href="#py-ppexpsetupgui-module">py.ppExpSetupGUI module</a></li>
+<li><a class="reference internal" href="#module-py.ppGlobals">py.ppGlobals module</a></li>
+<li><a class="reference internal" href="#module-py.ppSetup">py.ppSetup module</a></li>
+<li><a class="reference internal" href="#module-py.ppSpect">py.ppSpect module</a></li>
+<li><a class="reference internal" href="#module-py.ppUtil">py.ppUtil module</a></li>
+<li><a class="reference internal" href="#module-py.showJcamp">py.showJcamp module</a></li>
+<li><a class="reference internal" href="#py-slp-module">py.slp module</a></li>
+<li><a class="reference internal" href="#id1">py.slp\ module</a></li>
+<li><a class="reference internal" href="#module-py">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/py.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Jesse Zhang.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/py.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

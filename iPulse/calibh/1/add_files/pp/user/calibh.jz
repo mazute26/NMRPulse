@@ -1,0 +1,85 @@
+#ifdef PYTHON_SETUP
+#Write python code of pulse program between ""#ifdef PYTHON_SETUP" and "#endif"
+
+ut.putcomment('Hello world, Python pulse program test',2)
+
+T = 298
+p = 1
+f_h = wf = spec.WATER_FREQUENCY
+csw=fcalc.cs_water_Tp( T, p )
+
+ut.putcomment('Set pulse program')
+filename =write_bruker_search_path ('pp', 'calibh.sg', sourcefile = 'pp/user/calibh.jz')
+PUTPARS('PULPROG', filename)
+
+ut.putcomment('Setup Proton')
+PUTPARS('SFO1', wf)
+
+p1lp = spec.get_pulse_power( 'H1', 'rect', 3.5, nearby = True)
+PUTPARS(('p1', 'pldb1'), p1lp)
+
+p2lp = spec.get_pulse_power( 'H1', 'rect', 955, nearby = True)
+PUTPARS(('p2', 'pldb2'), p2lp)
+
+p3lp = spec.get_pulse_power( 'H1', 'sinc1.0', 4020, nearby = True)
+filename = write_bruker_search_path( 'shape', 'sinc1.0', sourcefile = 'wave/user/sinc1.0')
+PUTPARS(('p3', 'spdb1', 'spnam1', 'spoffs1'), p3lp + (filename, 0))
+
+#endif
+
+#include "bits.sg"
+
+;zg
+;1D sequence
+
+;#define PIOT
+#define HIGH_POWER
+;#define SHAPE
+
+"acqt0=0"
+
+;10u BLKGRAD
+;1m H2_LOCK
+;1m RESET
+1 ze
+2 10u; do:N
+  d1; pl31:N
+#ifdef PIOT
+  2u
+  8u pl2:f1
+  (p2 ph2:r):f1
+#endif
+#ifdef SHAPE
+  2u
+  20u pl3:f1
+  (p3:sp1 ph3):f1
+#endif
+#ifdef HIGH_POWER
+  10u
+  8u pl1:f1
+  (p1*2 ph1):f1
+#endif
+#ifdef PIOT
+  10u
+  8u pl2:f1
+  (p2 ph2:r):f1
+#endif
+  go=2 ph31 ;cpd2:N
+  10u
+  10u ;do:N
+  wr #0
+exit
+
+ph1=0 1 2 3
+;ph3=(3600)3348;
+;ph3=(3600)348;
+ph3=(3600)0
+;ph3=(3600)0
+ph2=2
+ph31=0 1 2 3
+
+
+
+;hl1: ecoupler high power level
+;p1 :  90 degree transmitter high power pulse
+;d1 : relaxation delay; 1-5 * T1
