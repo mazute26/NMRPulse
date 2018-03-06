@@ -6,7 +6,7 @@ to the py header in the pp
 
 import os, sys, re, getopt, datetime
 
-setup_path = '/Users/mazute26/Documents/PP_SETUP/topspinhome/PPlib'
+setup_path = '/opt/topspin3.2pl7/PPlib'
 sys.path.append(os.path.join(setup_path, 'py' ))
 
 import ppGlobals as pp
@@ -14,8 +14,8 @@ import ppUtil as ut
 import ppSpect as spec
 import fcalc
 
-from javax.swing import JFrame, JFileChooser
-#from java.awt import *
+from javax.swing import JFrame, JFileChooser, JPanel
+from java.awt import BorderLayout
 from java.io import File
 
 import TopCmds as TC
@@ -240,25 +240,39 @@ def printhelp(com):
     """
     print printhelp.__doc__ % com
 
+class DirGUI(JFrame):
+
+    def __init__(self):
+        super(DirGUI, self).__init__()
+        self.initUI()
+
+    def initUI(self):
+        self.panel = JPanel()
+        self.panel.setLayout(BorderLayout())
+
+        chooseFile = JFileChooser()
+        chooseFile.setCurrentDirectory(File(pp.iPulse_path))
+        chooseFile.setDialogTitle('Select experiment')
+        chooseFile.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY)
+
+        ret = chooseFile.showOpenDialog(self.panel)
+
+        if ret == JFileChooser.APPROVE_OPTION:
+            if chooseFile.getSelectedFile().isDirectory():
+                self.dir_path = str(chooseFile.getSelectedFile())
+
+    def get_dir_path(self):
+        return self.dir_path
+
+    def get_dir_name(self):
+        return self.dir_path.rsplit(os.sep, 1)[-1]
 
 
 def main():
-    ##########      GUI to choose pp file     ##########
-    frame = JFrame('test')
-    chooseFile = JFileChooser()
-    chooseFile.setCurrentDirectory(File(pp.pp_path))
+    gui = DirGUI()
 
-    ret = chooseFile.showOpenDialog(frame)
-
-    if ret == JFileChooser.APPROVE_OPTION:
-        file = chooseFile.getSelectedFile()
-        pp1 = file.getCanonicalPath()
-
-    pparray = pp1.split('/')
-    pp_name = pparray[-1]
-
-    ppname = pp_name
-    expname = ppname.split('.')[0]
+    ppname = '%s.jz' %gui.get_dir_name()
+    expname = gui.get_dir_name()
     rex = r'iPulse/(?P<exp>\w+)/\d+'
     rex = rex.replace('/', os.sep)
     match = re.search(rex, pp.addfiles_path)

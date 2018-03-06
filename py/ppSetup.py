@@ -17,12 +17,8 @@ import fcalc
 
 # the following hack is necessary, since BRUKER does not add the directories in
 #the user-defined python path to the sys.path
-try:
-    setup_path = '/Users/mazute26/Documents/PP_SETUP/topspinhome/PPlib'
-    spectrodics = 0
-except:
-    setup_path = '/Users/mazute26/Documents/PP_SETUP/topspinhome/PPlib'
-    spectrodics = 1
+
+setup_path = '/Users/mazute26/Documents/PP_SETUP/topspinhome/PPlib'
 if not (setup_path in sys.path):
     sys.path.append(setup_path)
 
@@ -193,10 +189,8 @@ def main():
     pp.addfiles_path = pp.addfiles_path.replace('water_nh', expname)
     pp.pp_file =  os.path.join(pp.addfiles_path, 'pp/user/%s' %ppname)
     pplogname = ppname + '.log'
-    if spectrodics != 1:
-        pp.pp_log = os.path.join(setup_path, 'docs/logfiles/%s' %pplogname)
-    else:
-        pp.pp_log = os.path.join(pp.addfiles_path, 'pp/user/%s' %pplogname)
+
+    pp.pp_log = os.path.join(pp.addfiles_path, 'pp/user/%s' %pplogname)
 
     pp.verbose_level = 0
     pp.run_flag = 'DRY'

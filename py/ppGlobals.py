@@ -27,8 +27,8 @@ lists_path = os.path.join(topspin_home, 'exp/stan/nmr')
 lists_path = lists_path.replace('/', os.sep)
 userhome_dot_topspin = os.path.join(topspin_home, 'classes')
 userhome_dot_topspin = userhome_dot_topspin.replace('/', os.sep)
-pp_path = os.path.join(setup_path, 'pp')
-pp_path = pp_path.replace('/', os.sep)
+iPulse_path = os.path.join(setup_path, 'iPulse')
+iPulse_path = iPulse_path.replace('/', os.sep)
 
 parfile_dirs_prop_default_path = os.path.join(
     topspin_home, 'classes/prop/parfile-dirs.prop')

@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-"""This macro is used to setup the PPlib project. It should be located in the
+"""This macro is used to setup the PPlib project. It should be located besides the
 topspin directory.
 """
 
@@ -12,9 +12,6 @@ PPlib = fpath.rsplit(os.sep, 1)[0]
 version = '3.2pl7'
 top = os.path.join(fpath.rsplit(os.sep, 2)[0], 'topspin%s' %version)
 topo = os.path.join(fpath.rsplit(os.sep, 2)[0], 'topspin')
-
-print 'PPlib: ', PPlib
-print 'Top: ', top
 
 def set_path(pyfile, dirname, path):
     """Changes the lines in the file, which contain a directory path definition.
