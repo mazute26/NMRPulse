@@ -4,7 +4,7 @@ This module creates the Dataset which can be overwritten by ppSetup.
 """
 import os, sys, re, getopt, datetime
 
-setup_path = '/Users/mazute26/Documents/PP_SETUP/topspinhome/PPlib'
+setup_path = '/Users/mazute26/Documents/PP_SETUP/PPlib'
 sys.path.append(os.path.join(setup_path, 'py' ))
 
 import ppGlobals as pp

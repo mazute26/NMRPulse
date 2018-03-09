@@ -7,6 +7,8 @@ import sys
 import re
 import math as m
 
+setup_path = '/opt/topspin3.2pl7/PPlib'
+sys.path.append(os.path.join(setup_path, 'py' ))
 import ppGlobals as pp
 
 try:
@@ -164,13 +166,43 @@ def putcomment(comment, verbosethreshold = 1, ornament=True):
         print comment
     return
 
-# class ExpType(object):
-#     """Class containining the type of the NMR experiment.
-#
-#     Attributes:
-#         dim (int): Dimension of the experiment
-#         nuc (set): Set of used nuclei channels
-#     """
-#     def __init__(self, dimension, nuclei):
-#         self.dim = dimension
-#         self.nuc = set(nuclei)
+def checkSer():
+    [expdir,expnum,procnum,userdir] = TC.CURDATA()
+    isSer= os.path.isfile('%s/%s/%s/ser' % (userdir,expdir,expnum) )
+    isFid= os.path.isfile('%s/%s/%s/fid' % (userdir,expdir,expnum) )
+
+    if isSer or isFid:
+        warning = TC.SELECT('' , 'This experiment number contains data',
+            ['DONT OVERWRITE', 'OVERWRITE'])
+        print warning
+        if warning != None:
+           if warning == 0:
+              EXIT()
+        else:
+           EXIT()
+
+def load_templt(templt, expname, stan_dir):
+    #checkSer()
+    try:
+        TC.NEWDATASET([expname, '1', '1', stan_dir])
+        TC.RE([expname, '1', '1', stan_dir], 'y')
+        TC.XCMD('rpar %s all' % templt)
+    except:
+        TC.MSG('''You need to define the parameter set "%s" defining the correct
+    routing to continue.
+    First define the correct routing using edasp.
+    Then save the parmeterset using:
+    wpar %s all
+    ''' % (templt,templt))
+        TC.EXIT()
+
+class ExpType(object):
+    """Class containining the type of the NMR experiment.
+
+    Attributes:
+        dim (int): Dimension of the experiment
+        nuc (set): Set of used nuclei channels
+    """
+    def __init__(self, dimension, nuclei):
+        self.dim = dimension
+        self.nuc = set(nuclei)

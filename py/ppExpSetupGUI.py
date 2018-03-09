@@ -186,7 +186,6 @@ class ExpType(object):
     def __init__(self, dimension, nuclei):
         self.dim = dimension
         self.nuc = set(nuclei)
-        #Why cant that be in ppUtil for BRUKER?
 
 def exp_type_chooser(dim, nuclei, expname):
     """Find the appropriate parameter set based on the dimension and nuclei used
@@ -198,7 +197,13 @@ def exp_type_chooser(dim, nuclei, expname):
         expname (str): name of the new dataset
     """
     if dim == 1:
-        pass
+        if nuclei.issubset(pp.hydrogen):
+            ut.load_templt('user/H_1D', expname, stan_dir)
+            ut.putcomment('H_1D used as starting parameter set.', 1,
+                ornament=False)
+        else:
+            pass
+
     elif dim == 2:
         if nuclei.issubset(pp.hydrogen):
             TC.NEWDATASET([expname, '1', '1', stan_dir], None, 'standard2D')
@@ -213,8 +218,7 @@ def exp_type_chooser(dim, nuclei, expname):
             ut.putcomment('HC_2D used as starting parameter set.', 1,
                 ornament=False)
         elif nuclei.issubset((pp.hydrogen | pp.carbon | pp.nitrogen)):
-            #TC.NEWDATASET([expname, '1', '1', stan_dir], None, 'FHSQCF3GPPH')
-            TC.NEWDATASET([expname, '1', '1', stan_dir], None, 'user/HNC_2D')
+            ut.load_templt('user/HNC_2D', expname, stan_dir)
             ut.putcomment('HNC_2D used as starting parameter set.', 1,
                 ornament=False)
         elif nuclei.issubset(pp.nuclei):
@@ -249,14 +253,11 @@ class DirGUI(JFrame):
     def initUI(self):
         self.panel = JPanel()
         self.panel.setLayout(BorderLayout())
-
         chooseFile = JFileChooser()
         chooseFile.setCurrentDirectory(File(pp.iPulse_path))
         chooseFile.setDialogTitle('Select experiment')
         chooseFile.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY)
-
         ret = chooseFile.showOpenDialog(self.panel)
-
         if ret == JFileChooser.APPROVE_OPTION:
             if chooseFile.getSelectedFile().isDirectory():
                 self.dir_path = str(chooseFile.getSelectedFile())
@@ -267,11 +268,33 @@ class DirGUI(JFrame):
     def get_dir_name(self):
         return self.dir_path.rsplit(os.sep, 1)[-1]
 
+class PPGUI(JFrame):
+
+    def __init__(self):
+        super(PPGUI, self).__init__()
+        self.initUI()
+
+    def initUI(self):
+        self.panel = JPanel()
+        self.panel.setLayout(BorderLayout())
+        chooseFile = JFileChooser()
+        chooseFile.setCurrentDirectory(File(
+            os.path.join(pp.addfiles_path, 'pp/user')))
+        chooseFile.setDialogTitle('Select pulse program')
+        ret = chooseFile.showOpenDialog(self.panel)
+        if ret == JFileChooser.APPROVE_OPTION:
+            f = chooseFile.getSelectedFile()
+            self.pp_path = f.getCanonicalPath()
+
+    def get_pp_path(self):
+        return self.pp_path
+
+    def get_pp_name(self):
+        return self.pp_path.rsplit(os.sep, 1)[-1]
 
 def main():
     gui = DirGUI()
-
-    ppname = '%s.jz' %gui.get_dir_name()
+    #ppname = '%s.jz' %gui.get_dir_name()
     expname = gui.get_dir_name()
     rex = r'iPulse/(?P<exp>\w+)/\d+'
     rex = rex.replace('/', os.sep)
@@ -280,7 +303,11 @@ def main():
         pp.addfiles_path = pp.addfiles_path.replace(match.group('exp'), expname)
     else:
         ut.putcomment('add_files directory not found', 0, False)
-    pp.pp_file =  os.path.join(pp.addfiles_path, 'pp/user/%s' %ppname)
+
+    pp_gui = PPGUI()
+    ppname =  pp_gui.get_pp_name()
+
+    pp.pp_file =  pp_gui.get_pp_path()
     pp.pp_file = pp.pp_file.replace('/', os.sep)
     pplogname = ppname + '.log'
     pp.pp_log = os.path.join(pp.addfiles_path, 'pp/user/%s' %pplogname)

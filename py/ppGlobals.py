@@ -14,12 +14,12 @@ run_flags = ['DRY', 'NORMAL', 'INTERACTIVE', 'FORCE']
 
 
 topspin_home = '/Users/mazute26/Documents/PP_SETUP/topspinhome'
-setup_path = '/Users/mazute26/Documents/PP_SETUP/topspinhome/PPlib'
+setup_path = '/Users/mazute26/Documents/PP_SETUP/PPlib'
 
 input_path = os.path.abspath(setup_path)
 input_path = input_path.replace('/', os.sep)
 addfiles_path = os.path.abspath(os.path.join(
-    setup_path, 'iPulse/water_nh/1/add_files'))
+    setup_path, 'iPulse/calibh/1/add_files'))
 addfiles_path = addfiles_path.replace('/', os.sep)
 
 #For Local Bruker Path PPlib

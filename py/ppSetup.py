@@ -8,7 +8,7 @@ try:
 except:
     print 'Topspin Python module TopCms could not be imported.'
 
-setup_path = '/Users/mazute26/Documents/PP_SETUP/topspinhome/PPlib'
+setup_path = '/Users/mazute26/Documents/PP_SETUP/PPlib'
 sys.path.append(os.path.join(setup_path, 'py'))
 import ppGlobals as pp
 import ppUtil as ut
@@ -18,7 +18,7 @@ import fcalc
 # the following hack is necessary, since BRUKER does not add the directories in
 #the user-defined python path to the sys.path
 
-setup_path = '/Users/mazute26/Documents/PP_SETUP/topspinhome/PPlib'
+setup_path = '/Users/mazute26/Documents/PP_SETUP/PPlib'
 if not (setup_path in sys.path):
     sys.path.append(setup_path)
 
