@@ -1,29 +1,34 @@
 #ifdef PYTHON_SETUP
-#Write python code of pulse program between ""#ifdef PYTHON_SETUP" and "#endif"
 
-ut.putcomment('Hello world, Python pulse program test',2)
 
 T = 298
 p = 1
 f_h = wf = spec.WATER_FREQUENCY
-csw=fcalc.cs_water_Tp( T, p )
+csw=fcalc.cs_water_Tp(T, p)
+scale = 600.0/wf
+
+ut.putcomment('DEFINE EXPERIMENT TYPE')
+pp.exp = ut.ExpType(1, ['H'])
 
 ut.putcomment('Set pulse program')
-filename =write_bruker_search_path ('pp', 'calibh.sg', sourcefile = 'pp/user/calibh.jz')
+filename =write_bruker_search_path ('pp', 'calibh.jz’, sourcefile = 'pp/user/calibh.jz' )
 PUTPARS('PULPROG', filename)
 
 ut.putcomment('Setup Proton')
 PUTPARS('SFO1', wf)
 
-p1lp = spec.get_pulse_power( 'H1', 'rect', 3.5, nearby = True)
+p1lp = spec.get_pulse_power( 'H1', 'rect', 6.48, nearby = True)
 PUTPARS(('p1', 'pldb1'), p1lp)
 
-p2lp = spec.get_pulse_power( 'H1', 'rect', 955, nearby = True)
+p2lp = spec.get_pulse_power( 'H1', 'rect', 825*scale, nearby = True)
 PUTPARS(('p2', 'pldb2'), p2lp)
 
-p3lp = spec.get_pulse_power( 'H1', 'sinc1.0', 4020, nearby = True)
+p3lp = spec.get_pulse_power( 'H1', 'sinc1.0', 1720*scale, nearby = True)
 filename = write_bruker_search_path( 'shape', 'sinc1.0', sourcefile = 'wave/user/sinc1.0')
 PUTPARS(('p3', 'spdb1', 'spnam1', 'spoffs1'), p3lp + (filename, 0))
+
+ut.putcomment('SETUP ACQUISITION')
+PUTPARS(('dw', 'td', 'si'), (40*scale, 2048, 524288))
 
 #endif
 

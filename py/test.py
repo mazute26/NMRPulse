@@ -15,7 +15,10 @@ try:
     from java.io import File
 except:
     pass
-import TopCmds as TC
+try:
+    import TopCmds as TC
+except:
+    pass
 
 # frame = JFrame('test')
 # chooseFile = JFileChooser()
@@ -55,12 +58,24 @@ import TopCmds as TC
 #     def get_dir_name(self):
 #         return self.dir_path.rsplit(os.sep, 1)[-1]
 
+def bits_overwrite(bits):
+    """Overwrites the channel definitions in bits.sg"""
+    lines2 = []
+    fh = open(bits, 'r')
+    lines = fh.readlines()
+    for line in lines:
+        for channel in spec.ROUTING:
+            rex = r'#define *(?P<nuc>\w+) *(?P<channel> %s)' %channel
+            match =re.search(rex, line)
+            if match:
+                line = line.replace(match.group('nuc'), spec.ROUTING[channel])
+        lines2.append(line)
+
+    fh.close()
+    fh = open(bits, 'w')
+    fh.writelines(lines2)
+    fh.close()
+    return
 
 if __name__ == '__main__':
-    stan_dir = os.path.join(os.environ['TOPO'], 'data/%s/nmr' %os.getenv("USER"))
-    expname = 'water_nh'
-    # templt = 'user/HNC_2D'
-    # TC.NEWDATASET([expname, '1', '1', stan_dir])
-    # TC.RE([expname, '1', '1', stan_dir], 'y')
-    # TC.XCMD('rpar %s all' % templt)
-    ut.load_templt('user/HNC_2D', expname, stan_dir)
+    pass

@@ -1,6 +1,67 @@
+#ifdef PYTHON_SETUP
+
+T = 298
+p = 1
+f_h = wf = spec.WATER_FREQUENCY
+csw = fcalc.cs_water_Tp( T, p)
+scale = 600.0/wf
+
+ut.putcomment('DEFINE EXPERIMENT TYPE')
+pp.exp = ut.ExpType(2, ['H','N','C'])
+
+filename = write_bruker_search_path('pp', 'noe_hn.jz', sourcefile = 'pp/user/noe_hn.jz')
+PUTPARS('PULPROG', filename)
+
+ut.putcomment('SETUP PROTON')
+PUTPARS('SFO1', wf)
+
+p1lp = spec.get_pulse_power('H1', 'rect', 6.5, nearby = True)
+PUTPARS( ('p1', 'pldb1'), p1lp)
+
+p2lp = spec.get_pulse_power('H1', 'rect', 1000.0*scale, nearby = True)
+PUTPARS(('p2', 'pldb2'), p2lp)
+
+p3lp = spec.get_pulse_power('H1', 'sinc1.0', 1500.0*scale, nearby = True)
+filename = write_bruker_search_path( 'shape', 'sinc1.0', sourcefile = 'wave/user/sinc1.0')
+PUTPARS(('p3', 'spdb1', 'spnam1', 'spoffs1'), p3lp + (filename, 0))
+
+p9lp = spec.get_pulse_power('H1', 'rect', 14.4, nearby = False)
+PUTPARS(('p9', pldb9'), p9lp)
+
+ut.putcomment('SETUP CARBON')
+f_c = fcalc.p2f_water( 177, 'C13', wf, csw )
+PUTPARS('SFO3', f_c)
+
+p5lp = spec.get_pulse_power( 'C13', 'rect', 53*scale)
+PUTPARS( ('p5', 'pldb5'), p5lp)
+
+ut.putcomment(' SETUP NITROGEN')
+f_n = fcalc.p2f_water( 116.5, 'N15', wf, csw)
+PUTPARS('SFO2', f_n)
+
+p7lp = spec.get_pulse_power ( 'N15', 'rect', 40, nearby=True)
+PUTPARS( ( 'p7', 'pldb7'), p7lp)
+
+p31lp =spec.get_pulse_power( 'N15', 'rect', 160*scale, nearby = True)
+filename = write_bruker_search_path( 'cpd', 'waltz16.31', sourcefile = 'cpd/user/waltz16.31' )
+PUTPARS(('p31','pldb31','CPDPRG2'), p31lp + (filename,))
+
+ut.putcomment('SETUP GRADIENTS')
+filename = write_bruker_search_path('gp', 'SINE.20', sourcefile = 'gp/SINE.20')
+PUTPARS(('GPNAM0', 'GPX0','GPY0','GPZ0'), (filename, 50, 0, 0))
+
+filename = write_bruker_search_path('gp', 'SINE.20', sourcefile = 'gp/SINE.20')
+PUTPARS(('GPNAM1', 'GPX1','GPY1','GPZ1'), (filename, 0, 0, 50))
+
+ut.putcomment('SETUP ACQUISITION')
+PUTPARS(('in0', 'in9', 'in10', 'l3'), (0.00002560, 0.00027440, 0.00030000, 120))
+PUTPARS( ('dw', 'td','si', '1 td', '1 si'), (50e-6*scale, 2048, 4096, 480, 1024))
+
+#endif
+
 #include "bits.sg"
 
-;noesy to n 
+;noesy to n
 ;history
 ;written by sg 2/23/93
 ;put in water flip_back 6/1/93
@@ -80,7 +141,7 @@
 	15m
 	lo to 10 times PRESAT_LOOP
 	goto 101
-	
+
 100	10u
 110	d19 	;dummy delay for nonNOE
 	15m
@@ -88,14 +149,14 @@
 
 101	10u
 	1m LOCK_OFF
-	50u 
+	50u
 	p20:gp0
 	5m pl2:H
 ;*****	start 90-degree on n	*****
 	(p7 ph3):N
 	d0
 	(p7*2 ph17):N
-	d9 
+	d9
 ;*****	proton 180		*****
 	(p2 ph21:r):H
 	2u
@@ -126,7 +187,7 @@
 	p21:gp1
 	2m pl3:H
 	(p3:sp1 ph13):H
-	4u 
+	4u
 	50u pl1:H
 	(p1 ph0):H
 	2u
@@ -168,7 +229,7 @@ lo to 4 times l3
 	15m
 	lo to 11 times PRESAT_LOOP
 	10u
-	10u pl1 
+	10u pl1
 	p1 ph31
 	(2u ph0)
 go=1 ph31

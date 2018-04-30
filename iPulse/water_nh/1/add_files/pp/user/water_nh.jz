@@ -7,7 +7,7 @@ csw = fcalc.cs_water_Tp(T, p)
 scale = 600.0/wf
 
 ut.putcomment('DEFINE EXPERIMENT TYPE')
-pp.exp = ExpType(2, ['H','N','C'])
+pp.exp = ut.ExpType(2, ['H','N','C'])
 
 filename = write_bruker_search_path('pp', 'water_nh.jz', sourcefile = 'pp/user/water_nh.jz')
 PUTPARS('PULPROG', filename)
@@ -61,7 +61,7 @@ PUTPARS(('p10', 'p11', 'p12'), (3000, 2000, 400))
 
 ut.putcomment('SETUP AQUISITION')
 PUTPARS(('in0', 'l3', '1 td', '1 si'), (300e-6, 200, 400, 512))
-PUTPARS(('dw', 'td','si'), (54e-6*scale, 1024, 2048))
+PUTPARS(('dw', 'td','si'), (54*scale, 1024, 2048))
 #endif
 
 #include "bits.sg"

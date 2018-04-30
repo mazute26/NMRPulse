@@ -3,6 +3,10 @@ T = 298
 p = 1
 f_h = wf = spec.WATER_FREQUENCY
 csw=fcalc.cs_water_Tp(T, p)
+scale = 600.0/wf
+
+ut.putcomment('DEFINE EXPERIMENT TYPE')
+pp.exp = ut.ExpType(1, ['H','C'])
 
 ut.putcomment('Set pulse program')
 filename =write_bruker_search_path ('pp', 'calibc.jz', sourcefile = 'pp/user/calibc.jz' )
@@ -16,14 +20,14 @@ PUTPARS(('p1', 'pldb1'), p1lp)
 
 ut.putcomment('SETUP CARBON')
 f_c = fcalc.p2f_water(177, 'C13', wf, csw)
-PUTPARS('SFO2', f_c)
+PUTPARS('SFO3', f_c)
 
 p3lp = spec.get_pulse_power( 'C13', 'sinc1.0', 53, nearby = True)
 filename = write_bruker_search_path( 'shape', 'sinc1.0', sourcefile = 'wave/user/sinc1.0')
 PUTPARS(('p3', 'spdb0', 'spnam0', 'spoffs0'), p3lp + (filename, 0))
 
 ut.putcomment('SETUP ACQUISITION')
-PUTPARS(('dw', 'td', 'si'), (40e-6*600.0/wf, 32768, 65536))
+PUTPARS(('dw', 'td', 'si'), (40*scale, 32768, 65536))
 
 #endif
 

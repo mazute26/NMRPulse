@@ -1,14 +1,13 @@
 """This module contains utility routines for the pp project.
 """
 
-
 import os
 import sys
 import re
 import math as m
 
 setup_path = '/opt/topspin3.2pl7/PPlib'
-sys.path.append(os.path.join(setup_path, 'py' ))
+sys.path.append(os.path.join(setup_path, 'py'))
 import ppGlobals as pp
 
 try:
@@ -32,13 +31,14 @@ def merge_dicts(*dict_args):
 
     return result
 
+
 def strip_comment(text, commentid):
     """strips all text from lines in text after commentid
     """
     la = text.splitlines()
     for idx, l in enumerate(la):
-        la[idx] = l.split(commentid,1)[0]
-    return reduce( lambda x,y: x + '\n' + y, la)
+        la[idx] = l.split(commentid, 1)[0]
+    return reduce(lambda x, y: x + '\n' + y, la)
 
 
 def show_vars(scope):
@@ -48,6 +48,7 @@ def show_vars(scope):
     for g in gs:
         print g, vars(scope)[g]
 
+
 def read_file(file):
     """reads file
     """
@@ -56,6 +57,7 @@ def read_file(file):
     fh.close()
     return data
 
+
 def write_text_file(text, file):
     """(over)writes text to file
     """
@@ -63,13 +65,15 @@ def write_text_file(text, file):
     fh.write(text)
     fh.close()
 
+
 def cmp_text_file(text, file):
     """returns True when text and file content are identical
     """
-    fh =  open(file)
+    fh = open(file)
     ftext = fh.read()
     fh.close()
     return cmp(ftext, text)
+
 
 def split_python_text(text):
     """
@@ -85,6 +89,7 @@ def split_python_text(text):
     (pythontext, aftere) = afterp.split('\n#endif', 1)
     nonpythontext = beforep + aftere
     return (pythontext, nonpythontext)
+
 
 def find_file_dir(filename, dirs_type, addfiles=False):
     '''
@@ -113,7 +118,7 @@ def find_file_dir(filename, dirs_type, addfiles=False):
 
     for par_dc_dir in pdict[dte]:
         if addfiles:
-            pdc = par_dc_dir.split('lists'+os.sep,1)
+            pdc = par_dc_dir.split('lists' + os.sep, 1)
             if len(pdc) < 2:
                 raise Exception('%s not in add_files directory' % par_dc_dir)
             par_dc_dir = pdc[1]
@@ -139,8 +144,9 @@ def flist_to_Bruker_flist(fs):
     fo = m.floor(fs[1])
     s = 'O %5.1f\n' % fo
     for f in fs:
-        s = s +  '%8.1f\n' % ((f-fo)*1e6)
+        s = s + '%8.1f\n' % ((f - fo) * 1e6)
     return s
+
 
 def cd_curd():
     """Check whether this is in topspin environment.
@@ -149,10 +155,11 @@ def cd_curd():
     if not ('TopCmds' in sys.modules):
         return
     cd = TC.CURDATA()
-    os.chdir(os.path.join(cd[3], cd[0], cd[1])) #Topspin dataset path:
-                                                #expname/expnumber/processnumber
+    os.chdir(os.path.join(cd[3], cd[0], cd[1]))  # Topspin dataset path:
+    # expname/expnumber/processnumber
 
-def putcomment(comment, verbosethreshold = 1, ornament=True):
+
+def putcomment(comment, verbosethreshold=1, ornament=True):
     """Print comment if above the verbose threshold
     with ornament (ornament = True)
     """
@@ -161,28 +168,30 @@ def putcomment(comment, verbosethreshold = 1, ornament=True):
     cs = '###################'
     ss = '   '
     if ornament:
-        print '\n' +cs +ss +comment +ss + cs +'\n'
+        print '\n' + cs + ss + comment + ss + cs + '\n'
     else:
         print comment
     return
 
+
 def checkSer():
-    [expdir,expnum,procnum,userdir] = TC.CURDATA()
-    isSer= os.path.isfile('%s/%s/%s/ser' % (userdir,expdir,expnum) )
-    isFid= os.path.isfile('%s/%s/%s/fid' % (userdir,expdir,expnum) )
+    [expdir, expnum, procnum, userdir] = TC.CURDATA()
+    isSer = os.path.isfile('%s/%s/%s/ser' % (userdir, expdir, expnum))
+    isFid = os.path.isfile('%s/%s/%s/fid' % (userdir, expdir, expnum))
 
     if isSer or isFid:
-        warning = TC.SELECT('' , 'This experiment number contains data',
-            ['DONT OVERWRITE', 'OVERWRITE'])
+        warning = TC.SELECT('', 'This experiment number contains data',
+                            ['DONT OVERWRITE', 'OVERWRITE'])
         print warning
         if warning != None:
-           if warning == 0:
-              EXIT()
+            if warning == 0:
+                EXIT()
         else:
-           EXIT()
+            EXIT()
+
 
 def load_templt(templt, expname, stan_dir):
-    #checkSer()
+    # checkSer()
     try:
         TC.NEWDATASET([expname, '1', '1', stan_dir])
         TC.RE([expname, '1', '1', stan_dir], 'y')
@@ -193,8 +202,9 @@ def load_templt(templt, expname, stan_dir):
     First define the correct routing using edasp.
     Then save the parmeterset using:
     wpar %s all
-    ''' % (templt,templt))
+    ''' % (templt, templt))
         TC.EXIT()
+
 
 class ExpType(object):
     """Class containining the type of the NMR experiment.
@@ -203,6 +213,7 @@ class ExpType(object):
         dim (int): Dimension of the experiment
         nuc (set): Set of used nuclei channels
     """
+
     def __init__(self, dimension, nuclei):
         self.dim = dimension
         self.nuc = set(nuclei)

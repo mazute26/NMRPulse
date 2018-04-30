@@ -44,14 +44,6 @@ py.ppAnalyze module
     :undoc-members:
     :show-inheritance:
 
-py.ppDataset module
--------------------
-
-.. automodule:: py.ppDataset
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 py.ppExpSetupGUI module
 -----------------------
 
@@ -100,18 +92,10 @@ py.showJcamp module
     :undoc-members:
     :show-inheritance:
 
-py.slp module
--------------
+py.test module
+--------------
 
-.. automodule:: py.slp
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-py.slp\\ module
----------------
-
-.. automodule:: py.slp\
+.. automodule:: py.test
     :members:
     :undoc-members:
     :show-inheritance:

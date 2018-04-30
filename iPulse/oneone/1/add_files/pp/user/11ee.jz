@@ -1,3 +1,37 @@
+#ifdef PYTHON_SETUP
+
+T = 298
+p = 1
+f_h = wf = spec.WATER_FREQUENCY
+csw = fcalc.cs_water_Tp(T, p)
+scale = 600.0/wf
+
+ut.putcomment('DEFINE EXPERIMENT TYPE')
+pp.exp = ut.ExpType(1, ['H','N'])
+
+filename = write_bruker_search_path('pp', '11ee.jz', sourcefile = 'pp/user/11ee.jz')
+PUTPARS('PULPROG', filename)
+
+ut.putcomment('SETUP PROTON')
+PUTPARS('SFO1', wf)
+
+p1lp = spec.get_pulse_power('H1', 'rect', 7.5, nearby = True)
+PUTPARS(('p1', 'pldb1'), p1lp)
+
+p2lp = spec.get_pulse_power('H1', 'rect', 7.42, nearby = True)
+PUTPARS(('p2', 'pldb2'), p2lp)
+
+ut.putcomment('SETUP NITROGEN')
+f_n = fcalc.p2f_water(116.5, 'N15', wf, csw)
+PUTPARS('SFO2', f_n)
+
+p31lp = spec.get_pulse_power( 'N15', 'rect', 200*scale, nearby = True)
+filename = write_bruker_search_path( 'cpd', 'waltz16.31', sourcefile = 'cpd/user/waltz16.31' )
+PUTPARS(('p31','pldb31','CPDPRG2'), p31lp + (filename,))
+
+
+#endif
+
 #include "bits.sg"
 
 #define PROTEIN
@@ -14,7 +48,7 @@
 2 10u do:N
   10u ;LOCK_ON
   d1 pl1:H
-  10u 
+  10u
   10u
   p1 ph1
   d7
@@ -38,7 +72,6 @@ exit
 ph0=0
 ph1=0 1 2 3
 ph2=2 3 0 1
-ph3=0 0 0 0 1 1 1 1 2 2 2 2 3 3 3 3 
-ph4=2 2 2 2 3 3 3 3 0 0 0 0 1 1 1 1 
+ph3=0 0 0 0 1 1 1 1 2 2 2 2 3 3 3 3
+ph4=2 2 2 2 3 3 3 3 0 0 0 0 1 1 1 1
 ph31=0 3 2 1 2 1 0 3
-

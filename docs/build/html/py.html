@@ -138,29 +138,134 @@ Outputs the acquisition parameters and their value.</p>
 <dd></dd></dl>
 
 </div>
-<div class="section" id="module-py.ppDataset">
-<span id="py-ppdataset-module"></span><h2>py.ppDataset module<a class="headerlink" href="#module-py.ppDataset" title="Permalink to this headline">¶</a></h2>
-<p>This module plays around with the Datasets of BRUKER Topspin</p>
-<dl class="function">
-<dt id="py.ppDataset.check_if_dataset">
-<code class="descclassname">py.ppDataset.</code><code class="descname">check_if_dataset</code><span class="sig-paren">(</span><em>pp_file</em>, <em>dataset_dir='/opt/topspin/data/mazute26/nmr'</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppDataset.check_if_dataset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Goes trough dataset_dir and checks if a experiment directory named pp_file already exists</p>
+<div class="section" id="module-py.ppExpSetupGUI">
+<span id="py-ppexpsetupgui-module"></span><h2>py.ppExpSetupGUI module<a class="headerlink" href="#module-py.ppExpSetupGUI" title="Permalink to this headline">¶</a></h2>
+<p>This creates a new BRUKER dataset and sets the aquisition parameters according
+to the py header in the pp. Jython objects are not included is this doc.</p>
+<dl class="class">
+<dt id="py.ppExpSetupGUI.ExpType">
+<em class="property">class </em><code class="descclassname">py.ppExpSetupGUI.</code><code class="descname">ExpType</code><span class="sig-paren">(</span><em>dimension</em>, <em>nuclei</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppExpSetupGUI.ExpType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class containining the type of the NMR experiment.</p>
+<dl class="docutils">
+<dt>Attributes:</dt>
+<dd>dim (int): Dimension of the experiment
+nuc (set): Set of used nuclei channels</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
-<dt id="py.ppDataset.get_highest_expno">
-<code class="descclassname">py.ppDataset.</code><code class="descname">get_highest_expno</code><span class="sig-paren">(</span><em>pp_file</em>, <em>dataset_dir='/opt/topspin/data/mazute26/nmr'</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppDataset.get_highest_expno" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the highstes expno of a given experiment pp_file</p>
+<dt id="py.ppExpSetupGUI.PP_PUTPAR">
+<code class="descclassname">py.ppExpSetupGUI.</code><code class="descname">PP_PUTPAR</code><span class="sig-paren">(</span><em>name</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppExpSetupGUI.PP_PUTPAR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assigns the aquisition parameters to its value. The assignements are saved
+in the .log file and are inputed to topspin (if run_flag not equal dry).</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>name: name of the parameter
+value: value of the parameter</dd>
+<dt>Raise:</dt>
+<dd>Exception: unknown flag</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
-<dt id="py.ppDataset.main">
-<code class="descclassname">py.ppDataset.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#py.ppDataset.main" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dt id="py.ppExpSetupGUI.PUTPARS">
+<code class="descclassname">py.ppExpSetupGUI.</code><code class="descname">PUTPARS</code><span class="sig-paren">(</span><em>nams</em>, <em>vals</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppExpSetupGUI.PUTPARS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same as PUTPAR but for tuples</p>
+</dd></dl>
 
-</div>
-<div class="section" id="py-ppexpsetupgui-module">
-<h2>py.ppExpSetupGUI module<a class="headerlink" href="#py-ppexpsetupgui-module" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="py.ppExpSetupGUI.check_if_dataset">
+<code class="descclassname">py.ppExpSetupGUI.</code><code class="descname">check_if_dataset</code><span class="sig-paren">(</span><em>expname</em>, <em>dataset_dir='TOP'</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppExpSetupGUI.check_if_dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Goes trough dataset_dir and checks if a experiment directory named
+expname already exists.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>expname: name of experiment
+dataset_dir: directory of experiements ($TOPO)</dd>
+<dt>Returns:</dt>
+<dd>True if experiments exists</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="py.ppExpSetupGUI.exp_type_chooser">
+<code class="descclassname">py.ppExpSetupGUI.</code><code class="descname">exp_type_chooser</code><span class="sig-paren">(</span><em>dim</em>, <em>nuclei</em>, <em>expname</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppExpSetupGUI.exp_type_chooser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the appropriate parameter set based on the dimension and nuclei used
+in the pulse program. This paramter set is then set as the current data set.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>dim (int): Dimension of the pulse program
+nuclei (set): Used nuclei
+expname (str): name of the new dataset</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="py.ppExpSetupGUI.get_highest_expno">
+<code class="descclassname">py.ppExpSetupGUI.</code><code class="descname">get_highest_expno</code><span class="sig-paren">(</span><em>expname</em>, <em>dataset_dir='TOP'</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppExpSetupGUI.get_highest_expno" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the highstes expno of a given experiment expname.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>expname: name of experiment
+dataset_dir: directory of experiements ($TOPO)</dd>
+<dt>Returns:</dt>
+<dd>highstest expno</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="py.ppExpSetupGUI.main">
+<code class="descclassname">py.ppExpSetupGUI.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#py.ppExpSetupGUI.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executeable to setup an experiment in topspin from iPulse.
+1. GUI to select experiment
+2. GUI to select pp
+3. Window asking to use current dataset or not
+3a. Creates new dataset based on condition
+4. Executes python header in pp
+5. Write log file</p>
+<dl class="docutils">
+<dt>Raise:</dt>
+<dd>Exception: file not found in addfiles directory
+Exception: Cancel button pressed
+Exception: No proper dataset chosen
+Exception: pp has no python header
+Exception: experiment type not found</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="py.ppExpSetupGUI.printhelp">
+<code class="descclassname">py.ppExpSetupGUI.</code><code class="descname">printhelp</code><span class="sig-paren">(</span><em>com</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppExpSetupGUI.printhelp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set-up new Bruker data set according to Python definitions in pulse program file</p>
+<p>usage: %s [options] programname</p>
+<p>programname: name of pulse program</p>
+<p>[options]:
+-a      : look for programname in add_files path
+-h      : print this text
+-r flag : set run flag to &lt;flag&gt; (can be DRY, NORMAL, FORCE, INTERACTIVE) [DRY]
+-v num  : set verbose level number to &lt;num&gt; [0]</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="py.ppExpSetupGUI.write_bruker_search_path">
+<code class="descclassname">py.ppExpSetupGUI.</code><code class="descname">write_bruker_search_path</code><span class="sig-paren">(</span><em>ftype</em>, <em>destfile</em>, <em>sourcefile=None</em>, <em>sourcetext=None</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppExpSetupGUI.write_bruker_search_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Will copy a file from sourcefile (out of the add_files directory) or
+text to destfile in first directory of Bruker search path for
+ftype = cpd, f1, gp, … with checks for overwrite, identity, etc.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>ftype: object type, e.g. ‘pp’ or ‘shape’
+destfile: file name in topspin destination directory
+sourcefile: source file from add file directory
+source text: source file inputed as text</dd>
+<dt>Raise:</dt>
+<dd>Exception: unknown run run_flag
+Exception: unequal source and destination file. Will not overwrite in
+‘NORMAL’ and ‘INTERACTIVE’ flag</dd>
+</dl>
+</dd></dl>
+
 </div>
 <div class="section" id="module-py.ppGlobals">
 <span id="py-ppglobals-module"></span><h2>py.ppGlobals module<a class="headerlink" href="#module-py.ppGlobals" title="Permalink to this headline">¶</a></h2>
@@ -199,6 +304,18 @@ E.g. {‘PY_DIRS’: [‘py/user’, ‘py’]}</dd>
 <div class="section" id="module-py.ppSetup">
 <span id="py-ppsetup-module"></span><h2>py.ppSetup module<a class="headerlink" href="#module-py.ppSetup" title="Permalink to this headline">¶</a></h2>
 <p>This is the module/program which sets the parameters on the spectrometer</p>
+<dl class="class">
+<dt id="py.ppSetup.ExpType">
+<em class="property">class </em><code class="descclassname">py.ppSetup.</code><code class="descname">ExpType</code><span class="sig-paren">(</span><em>dimension</em>, <em>nuclei</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppSetup.ExpType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class containining the type of the NMR experiment.</p>
+<dl class="docutils">
+<dt>Attributes:</dt>
+<dd>dim (int): Dimension of the experiment
+nuc (set): Set of used nuclei channels</dd>
+</dl>
+</dd></dl>
+
 <dl class="function">
 <dt id="py.ppSetup.PP_PUTPAR">
 <code class="descclassname">py.ppSetup.</code><code class="descname">PP_PUTPAR</code><span class="sig-paren">(</span><em>name</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppSetup.PP_PUTPAR" title="Permalink to this definition">¶</a></dt>
@@ -247,27 +364,47 @@ frequencies, pulse powers, etc</p>
 dict PULSE_POWER</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd><p class="first">nuc: Nucleus
+<dd>nuc: Nucleus
 pulse: pulse type
-nearby: If nearby = True then the closest value in the dict is used.</p>
-<blockquote class="last">
-<div>Otherwise the pulse power is extrapolated from the closest value.</div></blockquote>
-</dd>
+nearby: If nearby = True then the closest value in the dict is used.
+Otherwise the pulse power is extrapolated from the closest value.</dd>
 <dt>Returns:</dt>
 <dd>A tupel (pulse length in microns, pulse power in -dBW)</dd>
 </dl>
 </dd></dl>
 
+<dl class="function">
+<dt id="py.ppSpect.plot">
+<code class="descclassname">py.ppSpect.</code><code class="descname">plot</code><span class="sig-paren">(</span><em>lin=True</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppSpect.plot" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
 <div class="section" id="module-py.ppUtil">
 <span id="py-pputil-module"></span><h2>py.ppUtil module<a class="headerlink" href="#module-py.ppUtil" title="Permalink to this headline">¶</a></h2>
 <p>This module contains utility routines for the pp project.</p>
+<dl class="class">
+<dt id="py.ppUtil.ExpType">
+<em class="property">class </em><code class="descclassname">py.ppUtil.</code><code class="descname">ExpType</code><span class="sig-paren">(</span><em>dimension</em>, <em>nuclei</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppUtil.ExpType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class containining the type of the NMR experiment.</p>
+<dl class="docutils">
+<dt>Attributes:</dt>
+<dd>dim (int): Dimension of the experiment
+nuc (set): Set of used nuclei channels</dd>
+</dl>
+</dd></dl>
+
 <dl class="function">
 <dt id="py.ppUtil.cd_curd">
 <code class="descclassname">py.ppUtil.</code><code class="descname">cd_curd</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#py.ppUtil.cd_curd" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check whether this is in topspin environment.
 In this case, change to current data set. Else do nothing.</p>
 </dd></dl>
+
+<dl class="function">
+<dt id="py.ppUtil.checkSer">
+<code class="descclassname">py.ppUtil.</code><code class="descname">checkSer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#py.ppUtil.checkSer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="function">
 <dt id="py.ppUtil.cmp_text_file">
@@ -283,10 +420,10 @@ pp.parfile_dirs_dict (addfiles=False) or
 pp.parfile_dirs_default_dict (addfiles=True) under the key &lt;dirs_type&gt;.
 Returns:</p>
 <blockquote>
-<div>(filepath, dirpath)
-filepath: absolute path to file name if file exists (else None)
+<div>(filepath, dirpath)</div></blockquote>
+<p>filepath: absolute path to file name if file exists (else None)
 dirpath: absolute path to first directory in search path to write
-new file</div></blockquote>
+new file</p>
 </dd></dl>
 
 <dl class="function">
@@ -301,6 +438,11 @@ Args:</p>
 <dd>s: Bruker compatible frequency list.</dd>
 </dl>
 </dd></dl>
+
+<dl class="function">
+<dt id="py.ppUtil.load_templt">
+<code class="descclassname">py.ppUtil.</code><code class="descname">load_templt</code><span class="sig-paren">(</span><em>templt</em>, <em>expname</em>, <em>stan_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppUtil.load_templt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="function">
 <dt id="py.ppUtil.merge_dicts">
@@ -386,15 +528,13 @@ subdictionnary $ARRAY under the array name.</div></blockquote>
 <dl class="function">
 <dt id="py.showJcamp.parsearray">
 <code class="descclassname">py.showJcamp.</code><code class="descname">parsearray</code><span class="sig-paren">(</span><em>ar</em>, <em>li</em><span class="sig-paren">)</span><a class="headerlink" href="#py.showJcamp.parsearray" title="Permalink to this definition">¶</a></dt>
-<dd><p>Recursevly parses a string ar containing a Bruker array into a list of values.
-The first value is separated from ar and parsed. The recursion restarts with</p>
+<dd><p>Recursively parses a string ar containing a Bruker array into a list of values.
+The first value is separated from ar and parsed. The recursion restarts with
+the list li appended by the first parsed value and the remainder of ar.
+Enclosing &lt;&gt; are removed from strings
+Returns:</p>
 <blockquote>
-<div>the list li appended by the first parsed value and the remainder of ar.
-Enclosing &lt;&gt; are removed from strings</div></blockquote>
-<dl class="docutils">
-<dt>Returns:</dt>
-<dd>li: list of parsed values</dd>
-</dl>
+<div>li: list of parsed values</div></blockquote>
 </dd></dl>
 
 <dl class="function">
@@ -449,11 +589,14 @@ par_i: single_parameter_name | parameter_array_name | parameter_array_name array
 <dd></dd></dl>
 
 </div>
-<div class="section" id="py-slp-module">
-<h2>py.slp module<a class="headerlink" href="#py-slp-module" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="id1">
-<h2>py.slp\ module<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-py.test">
+<span id="py-test-module"></span><h2>py.test module<a class="headerlink" href="#module-py.test" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="py.test.bits_overwrite">
+<code class="descclassname">py.test.</code><code class="descname">bits_overwrite</code><span class="sig-paren">(</span><em>bits</em><span class="sig-paren">)</span><a class="headerlink" href="#py.test.bits_overwrite" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overwrites the channel definitions in bits.sg</p>
+</dd></dl>
+
 </div>
 <div class="section" id="module-py">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-py" title="Permalink to this headline">¶</a></h2>
@@ -475,15 +618,13 @@ par_i: single_parameter_name | parameter_array_name | parameter_array_name array
 <li><a class="reference internal" href="#module-py.fcalc">py.fcalc module</a></li>
 <li><a class="reference internal" href="#module-py.p2f">py.p2f module</a></li>
 <li><a class="reference internal" href="#module-py.ppAnalyze">py.ppAnalyze module</a></li>
-<li><a class="reference internal" href="#module-py.ppDataset">py.ppDataset module</a></li>
-<li><a class="reference internal" href="#py-ppexpsetupgui-module">py.ppExpSetupGUI module</a></li>
+<li><a class="reference internal" href="#module-py.ppExpSetupGUI">py.ppExpSetupGUI module</a></li>
 <li><a class="reference internal" href="#module-py.ppGlobals">py.ppGlobals module</a></li>
 <li><a class="reference internal" href="#module-py.ppSetup">py.ppSetup module</a></li>
 <li><a class="reference internal" href="#module-py.ppSpect">py.ppSpect module</a></li>
 <li><a class="reference internal" href="#module-py.ppUtil">py.ppUtil module</a></li>
 <li><a class="reference internal" href="#module-py.showJcamp">py.showJcamp module</a></li>
-<li><a class="reference internal" href="#py-slp-module">py.slp module</a></li>
-<li><a class="reference internal" href="#id1">py.slp\ module</a></li>
+<li><a class="reference internal" href="#module-py.test">py.test module</a></li>
 <li><a class="reference internal" href="#module-py">Module contents</a></li>
 </ul>
 </li>

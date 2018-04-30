@@ -1,4 +1,70 @@
-#include "bits.sg"
+#idef PYTHON_SETUP
+
+T = 298
+p = 1
+f_h = wf = spec.WATER_FREQUENCY
+csw=fcalc.cs_water_Tp(T, p)
+scale = 600.0/wf
+
+ut.putcomment('DEFINE EXPERIMENT TYPE')
+pp.exp = ut.ExpType(2, ['H','N','C'])
+
+filename = write_bruker_search_path('pp', 'hnco_fb.jz', sourcefile = 'pp/user/hnco_fb.jz')
+PUTPARS('PULPROG', filename)
+
+ut.putcomment('SETUP PROTON')
+PUTPARS('SFO1', wf)
+
+p1lp = spec.get_pulse_power ('H1', 'rect', 6.45, nearby = True)
+PUTPARS(('p1', 'pldb1'), p1lp)
+
+p2lp = spec.get_pulse_power ('H1', 'rect', 800.0*scale, nearby = True)
+PUTPARS (('p2', 'pldb2'), p2lp)
+
+p13lp = spec.get_pulse_power('H1', 'sinc1.0', 1200*scale, nearby=True)
+filename = write_bruker_search_path('shape', 'sinc1.0', sourcefile = 'wave/user/sinc1.0')
+PUTPARS(('p13','spdb0','spnam0','spoffs0'), p13lp + (filename, 0 ))
+
+p30lp = spec.get_pulse_power( 'H1', 'rect', 50)
+filename = write_bruker_search_path( 'cpd', 'dipsi2.30', sourcefile = 'cpd/user/dipsi2.30')
+PUTPARS(('p30','pldb30', 'CPDPRG1'), p30lp + (filename,))
+
+ut.putcomment('SETUP CARBON')
+f_ca = fcalc.p2f_water( 56, 'C13', wf, csw)
+f_c = fcalc.p2f_water( 177, 'C13', wf, csw)
+df_c_ca=(f_c-f_ca)*1e6
+PUTPARS('SFO3', f_c)
+
+p5lp = spec.get_pulse_power('C13', 'rect', 53)
+PUTPARS(('p5','pldb5'), p5lp
+
+p6lp = spec.get_pulse_power('C13', 'rect', 162.2)
+filename = write_bruker_search_path( 'shape', 'rect32', sourcefile = 'wave/user/rect32' )
+PUTPARS(('p6','spdb3','spnam3','spoffs3'), p6lp + (filename, df_c_ca))
+
+ut.putcomment('SETUP NITROGEN')
+f_n = fcalc.p2f_water( 116.5, 'N15', wf, csw )
+PUTPARS('SFO2', f_n)
+
+p7lp = spec.get_pulse_power('N15', 'rect', 40, nearby=True)
+PUTPARS(('p7','pldb7'), p7lp)
+
+p31lp = spec.get_pulse_power('N15', 'rect', 200*scale, nearby=True)
+filename = write_bruker_search_path( 'cpd', 'waltz16.31', sourcefile = 'cpd/user/waltz16.31')
+PUTPARS(('p31','pldb31','CPDPRG3'), p31lp + (filename,))
+
+ut.putcomment('SETUP GRADIENTS')
+filename = write_bruker_search_path( 'gp', 'sine.50', sourcefile = 'gp/user/sine.50')
+PUTPARS(('GPNAM1','GPX1','GPY1','GPZ1'), (filename, 0, 0, -50))
+
+ut.putcomment('SETUP ACQUISITION')
+PUTPARS(('l3', 'l4', 'l5'), (100, 45, 1))
+PUTPARS(('in0', 'in21', 'in23'), (300e-6, 300e-6, 300e-6))
+PUTPARS(('DW', 'TD', 'SI', '1 TD', '1 SI' ), (54, 1024, 2048, 18000, 256)
+
+#endif
+
+#include "bits.sg"s
 
 ;hnco_fb.sg
 #define CARBONYL
@@ -11,7 +77,7 @@
 ;written on 10/23/91
 ;used for sg hncoct/8 10/23/91
 ;interchanged f2 and f3 6/12/92
-;used for gv 
+;used for gv
 ;put in NH2 purge pulse ph22 7/17/92
 ;put additional +/- on last nitrogen 90 pulse 7/17/92
 ;used for jacob calcineurin 7/17/92
@@ -109,12 +175,12 @@
         2.25m
         (d26 p1*2 ph1) (p7*2 ph2):N
         2.25m
-        (p1 ph2) 
+        (p1 ph2)
         2u
         50u pl2:f1
         (p2 ph24:r)     ;water flip-back using soft pulse
         2u
-        p20:gp1         ;GRAD( 10, POSITIV, 20 )
+        p20:gp1         ;GRAD(10, POSITIV, 20 )
         2m pl1:f1
         (p7 ph3):N
 ;*******        n15 evolution           *******
@@ -123,7 +189,7 @@
         (d25 p7*2 ph5):N (p6 ph6):C1                                            ;p6 on co
         10u
         d23 pl5:C1
-        (p7 ph7):N 
+        (p7 ph7):N
         4u do:f1        ;dipsi interrupted (because of p23 gradient)
         4u pl1:f1
         (p1 ph27)       ;1h magnetization to z-axis
@@ -141,21 +207,21 @@
         (p7*2 ph10):N  (p6:sp3 ph22):C1
         2u
         d0 pl5:C1
-#else 
+#else
         4u
 #endif
-        (p5 ph20):C1 
+        (p5 ph20):C1
         (p7 ph10):N
         4u
         4u
         d15             ;p1:c8
         10m pl6:C1
-        (d25 p7*2 ph10):N (p6 ph20):C1 
-        d17 
+        (d25 p7*2 ph10):N (p6 ph20):C1
+        d17
         4u do:f1        ;dipsi off
         4u pl1:f1
         (p1 ph27)
-        d16     
+        d16
         (p7 ph0):N
         5u
         p21:gp1         ;GRAD( 40, POSITIV, 30 )
@@ -165,7 +231,7 @@
         2u
         2u
         50u pl1:f1
-        (p1 ph0) 
+        (p1 ph0)
 ;*******        watergate               *******
         5u
         p22:gp1         ;GRAD( 50, POSITIV, 8.0 )
@@ -183,7 +249,7 @@
         10u pl31:N
 #endif
 #ifndef TEST_1D
-        950u    
+        950u
 go=2 ph31 cpds3:N
 5u do:N
 d11 wr #0 if #0 zd

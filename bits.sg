@@ -1,0 +1,35 @@
+;Gradnt.incl  -  include file for Gradient Spectroscopy
+;avance-version
+;version 94/06/27
+
+#include "Avance.incl"
+#include "Grad.incl"
+
+
+#define H f1
+#define N f2
+#define C1 f3
+#define D f4
+#define C2 f5
+
+#define HIGH0(A) setnmr0|A
+#define LOW0(A) setnmr0^A
+#define HIGH2(A) setnmr2|A
+#define LOW2(A) setnmr2^A
+
+#define unblank BLKGRAD
+#define LOCK_ON BLKGRAD
+#define blank UNBLKGRAD
+#define LOCK_OFF UNBLKGRAD
+
+
+
+#define PHASE_2( A )    A A
+#define PHASE_4( A )    A A A A
+#define PHASE_8( A )    A A A A A A A A
+#define PHASE_16( A )   A A A A A A A A A A A A A A A A
+#define PHASE_32( A )   A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A
+
+
+
+

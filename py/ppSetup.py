@@ -16,7 +16,7 @@ import ppSpect as spec
 import fcalc
 
 # the following hack is necessary, since BRUKER does not add the directories in
-#the user-defined python path to the sys.path
+# the user-defined python path to the sys.path
 
 setup_path = '/Users/mazute26/Documents/PP_SETUP/PPlib'
 if not (setup_path in sys.path):
@@ -44,48 +44,47 @@ def write_bruker_search_path(ftype, destfile, sourcefile=None, sourcetext=None):
         ut.putcomment(source, 2, ornament=False)
     else:
         ut.putcomment('input is from sourcefile: ' + pp.addfiles_path + '/' + sourcefile,
-            2, ornament=False)
+                      2, ornament=False)
         sourcestring = 'sourcefile <%s>' % sourcefile
-        f = open(os.path.join(pp.addfiles_path,sourcefile))
+        f = open(os.path.join(pp.addfiles_path, sourcefile))
         source = f.read()
         f.close()
         ut.putcomment(source, 3, ornament=False)
-
 
     (destfilefullpath, destdir) = ut.find_file_dir(destfile, ftype)
     if destfilefullpath:
         ut.putcomment('destination file exists: ' + destfilefullpath, 2, ornament=False)
         if not ut.cmp_text_file(source, destfilefullpath):
             outstring = ('PP_FILE NO_ACTION: %s equals destfile <%s>'
-                %  (sourcestring, destfilefullpath))
+                         % (sourcestring, destfilefullpath))
             ut.putcomment(outstring, 1, ornament=False)
             pp.pp_log_fd.write('%s\n' % outstring)
         else:
             outstring = ('PP_FILE CONFLICT: %s is not equal to destfile <%s>'
-                %  (sourcestring, destfilefullpath))
+                         % (sourcestring, destfilefullpath))
             ut.putcomment(outstring, 0, ornament=False)
             pp.pp_log_fd.write('%s\n' % outstring)
             if pp.run_flag == 'DRY':
                 outstring = ('PP_FILE OVERWRITE: %s will overwrite destfile <%s>'
-                    %  (sourcestring, destfilefullpath))
+                             % (sourcestring, destfilefullpath))
                 pp.pp_log_fd.write('%s\n' % outstring)
-            elif pp.run_flag  == 'NORMAL':
+            elif pp.run_flag == 'NORMAL':
                 raise Exception('%s\nPP_FILE NO_OVERWRITE: run_flag is %s\n'
-                    % (outstring, pp.run_flag))
+                                % (outstring, pp.run_flag))
             elif pp.run_flag == 'FORCE':
                 outstring = ('PP_FILE OVERWRITE: %s overwrites destfile <%s>'
-                    %  (sourcestring, destfilefullpath))
+                             % (sourcestring, destfilefullpath))
                 ut.putcomment(outstring, 0, ornament=False)
                 pp.pp_log_fd.write('%s\n' % outstring)
                 ut.write_text_file(source, destfilefullpath)
             elif pp.run_flag == 'INTERACTIVE':
                 raise Exception('%s\nPP_FILE NO_OVERWRITE: run_flag is %s\n'
-                % (outstring, pp.run_flag))
+                                % (outstring, pp.run_flag))
 
     else:
         df1 = os.path.join(destdir, destfile)
         outstring = ('PP_FILE CREATE: destfile <%s> from %s'
-            %  (df1, sourcestring))
+                     % (df1, sourcestring))
         ut.putcomment(outstring, 1, ornament=False)
         pp.pp_log_fd.write('%s\n' % outstring)
         if pp.run_flag == 'DRY':
@@ -104,19 +103,19 @@ def PP_PUTPAR(name, value):
         raise Exception('unknown run_flag: ' + pp.run_flag)
 
     brukername = name = name.upper()
-    ut.putcomment('PP_PUTPAR input: %s %s' %  (name, value), 2, ornament=False)
+    ut.putcomment('PP_PUTPAR input: %s %s' % (name, value), 2, ornament=False)
 
     m = pp.par_array_names_re.match(name)
     if m:
         ut.putcomment('detected array ' + m.group('arn') + ' ' + m.group('ind'),
-            3, ornament=False)
+                      3, ornament=False)
         an = m.group('arn')
         ind = m.group('ind')
 
         m1 = re.match('(PL|SP)DB', an)
         if m1:
             an = m1.group(1) + 'W'
-            value = pow(10.0, -value/10.)
+            value = pow(10.0, -value / 10.)
 
         m1 = re.match('(D|IN|P|INP)', an)
         if m1 and (type(value) == str):
@@ -124,17 +123,17 @@ def PP_PUTPAR(name, value):
             if m2:
                 val = m2.group('val')
                 un = m2.group('unit')
-                value = float(val)*pp.time_units[un]
+                value = float(val) * pp.time_units[un]
                 if re.match('(P|INP)', an):
-                            value = value * 1e6
+                    value = value * 1e6
 
         brukername = an + ' ' + ind
 
-    pp.pp_log_fd.write('%s: %s\n' %  (brukername, str(value)))
-    ut.putcomment('PP_PUTPAR: %s %s' %  (brukername, str(value)), ornament=False)
+    pp.pp_log_fd.write('%s: %s\n' % (brukername, str(value)))
+    ut.putcomment('PP_PUTPAR: %s %s' % (brukername, str(value)), ornament=False)
 
     if pp.run_flag == 'DRY':
-        #print top.Cmd.putPar(brukername, str(value))
+        # print top.Cmd.putPar(brukername, str(value))
         return None
     elif pp.run_flag in ['FORCE', 'NORMAL', 'INTERACTIVE']:
         return TC.PUTPAR(brukername, str(value))
@@ -145,8 +144,9 @@ def PUTPARS(nams, vals):
     if (type(nams) != tuple) and (type(vals) != tuple):
         PP_PUTPAR(nams, vals)
         return
-    for n,v in zip(nams, vals):
+    for n, v in zip(nams, vals):
         PP_PUTPAR(n, v)
+
 
 class ExpType(object):
     """Class containining the type of the NMR experiment.
@@ -155,9 +155,11 @@ class ExpType(object):
         dim (int): Dimension of the experiment
         nuc (set): Set of used nuclei channels
     """
+
     def __init__(self, dimension, nuclei):
         self.dim = dimension
         self.nuc = set(nuclei)
+
 
 def printhelp(com):
     """Set-up Bruker data set according to Python definitions in pulse program file
@@ -175,10 +177,8 @@ def printhelp(com):
     print printhelp.__doc__ % com
 
 
-
 def main():
-
-    setopts,args = getopt.gnu_getopt(sys.argv[1:], 'ahr:v:')
+    setopts, args = getopt.gnu_getopt(sys.argv[1:], 'ahr:v:')
 
     if len(args) == 0:
         printhelp(sys.argv[0])
@@ -187,10 +187,10 @@ def main():
     ppname = args[0]
     expname = ppname.split('.')[0]
     pp.addfiles_path = pp.addfiles_path.replace('water_nh', expname)
-    pp.pp_file =  os.path.join(pp.addfiles_path, 'pp/user/%s' %ppname)
+    pp.pp_file = os.path.join(pp.addfiles_path, 'pp/user/%s' % ppname)
     pplogname = ppname + '.log'
 
-    pp.pp_log = os.path.join(pp.addfiles_path, 'pp/user/%s' %pplogname)
+    pp.pp_log = os.path.join(pp.addfiles_path, 'pp/user/%s' % pplogname)
 
     pp.verbose_level = 0
     pp.run_flag = 'DRY'
@@ -203,14 +203,13 @@ def main():
             (pp.pp_file, adir) = ut.find_file_dir(ppname, 'PP', addfiles=True)
             if not pp.pp_file:
                 raise Exception('%s not found in add_files path %s'
-                    % (ppname, pp.addfiles_path))
+                                % (ppname, pp.addfiles_path))
         elif opt[0] == '-r':
             pp.run_flag = opt[1]
         elif opt[0] == '-v':
             pp.verbose_level = int(opt[1])
 
-
-    ut.putcomment('Installing pulse program file: ' + pp.pp_file ,1, ornament=False)
+    ut.putcomment('Installing pulse program file: ' + pp.pp_file, 1, ornament=False)
     ut.putcomment('Logfile: %s' % os.path.abspath(pp.pp_log), 1, ornament=False)
     ut.putcomment('run_flag: %s' % pp.run_flag, 1, ornament=False)
 
@@ -218,18 +217,17 @@ def main():
         ut.putcomment('pp.ppGlobals', 1)
         ut.show_vars(pp)
 
-
     (pythontext, nonpythontext) = ut.split_python_text(ut.read_file(pp.pp_file))
 
     if not pythontext:
         raise Exception('%s contains no python text' % pp.pp_file)
 
-
     pp.pp_log_fd = open(pp.pp_log, 'w')
     now = datetime.datetime.now()
-    pp.pp_log_fd.write('Date and Time: %s \n' %now)
+    pp.pp_log_fd.write('Date and Time: %s \n' % now)
     exec pythontext
     pp.pp_log_fd.close()
+
 
 if __name__ == "__main__":
     main()
