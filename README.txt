@@ -1,4 +1,4 @@
-PPlib Version 0.00.00
+NMRPulse Version 0.00.00
 
 =======================
 

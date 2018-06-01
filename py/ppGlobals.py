@@ -18,7 +18,7 @@ setup_path = '/Users/mazute26/Documents/PP_SETUP/PPlib'
 input_path = os.path.abspath(setup_path)
 input_path = input_path.replace('/', os.sep)
 addfiles_path = os.path.abspath(os.path.join(
-    setup_path, 'iPulse/calibh/1/add_files'))
+    setup_path, 'Library/calibh/1/add_files'))
 addfiles_path = addfiles_path.replace('/', os.sep)
 
 # For Local Bruker Path PPlib
@@ -26,8 +26,8 @@ lists_path = os.path.join(topspin_home, 'exp/stan/nmr')
 lists_path = lists_path.replace('/', os.sep)
 userhome_dot_topspin = os.path.join(topspin_home, 'classes')
 userhome_dot_topspin = userhome_dot_topspin.replace('/', os.sep)
-iPulse_path = os.path.join(setup_path, 'iPulse')
-iPulse_path = iPulse_path.replace('/', os.sep)
+library_path = os.path.join(setup_path, 'Library')
+library_path = library_path.replace('/', os.sep)
 
 parfile_dirs_prop_default_path = os.path.join(
     topspin_home, 'classes/prop/parfile-dirs.prop')

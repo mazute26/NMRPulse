@@ -288,7 +288,7 @@ def printhelp(com):
 
 class DirGUI(JFrame):
     """
-    GUI to select experiment. Default starting directory is iPulse.
+    GUI to select experiment. Default starting directory is Library.
     """
 
     def __init__(self):
@@ -299,7 +299,7 @@ class DirGUI(JFrame):
         self.panel = JPanel()
         self.panel.setLayout(BorderLayout())
         chooseFile = JFileChooser()
-        chooseFile.setCurrentDirectory(File(pp.iPulse_path))
+        chooseFile.setCurrentDirectory(File(pp.library_path))
         chooseFile.setDialogTitle('Select experiment')
         chooseFile.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY)
         ret = chooseFile.showOpenDialog(self.panel)
@@ -349,7 +349,7 @@ class PPGUI(JFrame):
 
 def main():
     """
-    Execute to setup an experiment in topspin from iPulse.
+    Execute to setup an experiment in topspin from Library.
     1. GUI to select experiment
     2. GUI to select pp
     3. Window asking to use current dataset or not
@@ -366,7 +366,7 @@ def main():
     """
     gui = DirGUI()
     expname = gui.get_dir_name()
-    rex = r'iPulse/(?P<exp>\w+)/\d+'
+    rex = r'Library/(?P<exp>\w+)/\d+'
     rex = rex.replace('/', os.sep)
     match = re.search(rex, pp.addfiles_path)
     if match:

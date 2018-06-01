@@ -29,7 +29,7 @@ def set_path(pyfile, dirname, path):
     """Changes the lines in the file, which contain a directory path definition.
     Args:
         pyfile (str): py file containing the definition
-        e.g. setup_path = '/Users/username/Documents/iPulse'
+        e.g. setup_path = '/Users/username/Documents/Library'
         dirname (str): directory name that should be set
         e.g. setup_path
         path (str): New path that should be set
