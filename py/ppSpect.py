@@ -121,7 +121,7 @@ def plot(lin=True):
 
     plot.scatter(Xdata, Ydata, color='red', label='H.- J.  calibration')
     plot.legend(loc='upper left')
-    plt.show()
+    plot.show()
     return
 
 
