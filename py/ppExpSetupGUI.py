@@ -349,7 +349,7 @@ class PPGUI(JFrame):
 
 def main():
     """
-    Executeable to setup an experiment in topspin from iPulse.
+    Execute to setup an experiment in topspin from iPulse.
     1. GUI to select experiment
     2. GUI to select pp
     3. Window asking to use current dataset or not
@@ -387,7 +387,7 @@ def main():
     pp.verbose_level = 0
     pp.run_flag = 'DRY'
 
-    ######      Parse input arguments   #########
+    # Parse input arguments
     setopts, args = getopt.gnu_getopt(sys.argv[1:], 'ahr:v:')
     #
     # if len(args) == 0:
@@ -416,7 +416,7 @@ def main():
         ut.putcomment('pp.ppGlobals', 1)
         ut.show_vars(pp)
 
-    #######      Windows asking whether to use current dataset   #######
+    # Windows asking whether to use current dataset
     value = TC.SELECT('Dataset', 'Set parameter in current dataset?', ['Yes', 'No'])
 
     if value == 0:
@@ -428,13 +428,13 @@ def main():
     elif value < 0:
         raise Exception('No dataset chosen.')
 
-        ###########     Read pulse programm     ###############
+    # Read pulse programm
     (pythontext, nonpythontext) = ut.split_python_text(ut.read_file(pp.pp_file))
 
     if not pythontext:
         raise Exception('%s contains no python text' % pp.pp_file)
 
-    ###########     Get experiment types    ###############
+    # Get experiment types
     line = ''
     for lines in pythontext.split('\n'):
         if 'ExpType' in lines:
@@ -453,7 +453,7 @@ def main():
         ut.putcomment(
             '%s channels are used.' % ', '.join(pp.exp.nuc), 2, ornament=False)
 
-    ###########    Create new Dataset       ###############
+    #  Create new Dataset
     if value == 1:
         expname = ppname.split('.')[0]
         datasetdir = stan_dir
@@ -471,8 +471,7 @@ def main():
             # Make new dataset based on BRUKER standard
             exp_type_chooser(pp.exp.dim, pp.exp.nuc, expname)
 
-        ###########    Setup aquisition parameters in new Dataset     ###############
-
+    # Setup acquisition parameters in new Dataset
     pp.pp_log_fd = open(pp.pp_log, 'w')
     now = datetime.datetime.now()
     pp.pp_log_fd.write('Date and Time: %s \n' % now)

@@ -5,15 +5,15 @@ import os
 import sys
 import re
 import math as m
+import ppGlobals as pp
 
 setup_path = '/opt/topspin3.2pl7/PPlib'
 sys.path.append(os.path.join(setup_path, 'py'))
-import ppGlobals as pp
 
 try:
     import TopCmds as TC
-except:
-    pass
+except ImportError:
+    print 'TopCmds.py not found'
 
 
 def merge_dicts(*dict_args):
@@ -92,7 +92,7 @@ def split_python_text(text):
 
 
 def find_file_dir(filename, dirs_type, addfiles=False):
-    '''
+    """
     Find file <filename> in search path defined in
     pp.parfile_dirs_dict (addfiles=False) or
     pp.parfile_dirs_default_dict (addfiles=True) under the key <dirs_type>.
@@ -101,7 +101,7 @@ def find_file_dir(filename, dirs_type, addfiles=False):
     filepath: absolute path to file name if file exists (else None)
     dirpath: absolute path to first directory in search path to write
     new file
-    '''
+    """
     dte = dirs_type.upper()
     if not re.search('_DIRS$', dte):
         dte += '_DIRS'
@@ -183,11 +183,11 @@ def checkSer():
         warning = TC.SELECT('', 'This experiment number contains data',
                             ['DONT OVERWRITE', 'OVERWRITE'])
         print warning
-        if warning != None:
+        if warning is not None:
             if warning == 0:
-                EXIT()
+                TC.EXIT()
         else:
-            EXIT()
+            TC.EXIT()
 
 
 def load_templt(templt, expname, stan_dir):

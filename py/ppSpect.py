@@ -9,7 +9,7 @@ try:
 except:
     pass
 
-WATER_FREQUENCY = 600.13281495
+WATER_FREQUENCY = 600.13281495  # in MHz
 
 ROUTING = {'f1': 'H', 'f2': 'N', 'f3': 'C1', 'f4': 'D'}
 

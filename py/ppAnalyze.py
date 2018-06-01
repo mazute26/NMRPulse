@@ -100,7 +100,6 @@ Analyze pulse program file <programname> to make suggestions for automated set-u
         if not pp.pp_file:
             raise Exception('%s not found in add_files path %s' % (ppname, pp.addfiles_path))
 
-
     ut.putcomment('Analyzing pulse program file: ' + pp.pp_file ,1, ornament = False)
 
     if pp.verbose_level > 1:
@@ -108,7 +107,6 @@ Analyze pulse program file <programname> to make suggestions for automated set-u
         ut.show_vars(pp)
 
     parfilename = 'acqus'
-
 
     analyzepp(pp.pp_file, parfilename)
 

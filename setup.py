@@ -16,7 +16,7 @@ version = '3.2pl7'
 topo = os.path.join(fpath.rsplit(os.sep, 3)[0], 'topspin')
 
 mess = """
-    Please enter the tospin directory:
+    Please enter the topspin directory:
     e.g. %s
 
     """ % fpath.rsplit(os.sep, 2)[0]
