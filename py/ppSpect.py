@@ -7,6 +7,7 @@ try:
     import matplotlib.pyplot as plt
     import numpy as np
 except:
+    print 'No plotting. Cannot import matplotlib and numpy.'
     pass
 
 WATER_FREQUENCY = 600.13281495  # in MHz
