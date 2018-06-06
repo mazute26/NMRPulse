@@ -2,6 +2,10 @@
 """
 
 import os, sys, re, getopt, datetime
+import .ppGlobals as pp
+import .ppUtil as ut
+import .ppSpect as spec
+import .fcalc
 
 try:
     import TopCmds as TC
@@ -10,10 +14,7 @@ except:
 
 setup_path = '/Users/mazute26/Documents/PP_SETUP/PPlib'
 sys.path.append(os.path.join(setup_path, 'py'))
-import ppGlobals as pp
-import ppUtil as ut
-import ppSpect as spec
-import fcalc
+
 
 # the following hack is necessary, since BRUKER does not add the directories in
 # the user-defined python path to the sys.path

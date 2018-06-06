@@ -10,15 +10,16 @@ import re
 import getopt
 from optparse import OptionParser
 
+import .ppGlobals as pp
+import .showJcamp as sj
+import .ppUtil as ut
+
 # the following hack is necessary, since BRUKER does not add the directories
 #in the user-defined python path to the sys.path
 setup_path = '/Users/mazute26/Documents/PP_SETUP/PPlib'
 if not (setup_path in sys.path):
     sys.path.append(os.path.join(setup_path, 'py'))
 
-import ppGlobals as pp
-import showJcamp as sj
-import ppUtil as ut
 
 def analyzepp(progfilename, parfilename):
     """Analyze pulse program <progfilename> using acqu file <parfilename>.

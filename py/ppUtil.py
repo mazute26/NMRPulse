@@ -5,15 +5,16 @@ import os
 import sys
 import re
 import math as m
-import ppGlobals as pp
-
-setup_path = '/opt/topspin3.2pl7/PPlib'
-sys.path.append(os.path.join(setup_path, 'py'))
+import .ppGlobals as pp
+import .ppSpect as spec
 
 try:
     import TopCmds as TC
 except ImportError:
     print 'TopCmds.py not found'
+
+setup_path = '/opt/topspin3.2pl7/PPlib'
+sys.path.append(os.path.join(setup_path, 'py'))
 
 
 def merge_dicts(*dict_args):
@@ -204,6 +205,28 @@ def load_templt(templt, expname, stan_dir):
     wpar %s all
     ''' % (templt, templt))
         TC.EXIT()
+
+
+def bits_overwrite(bits):
+    """Overwrites the channel definitions in bits.sg
+        bits: path to bits.sg file
+    """
+    lines2 = []
+    fh = open(bits, 'r')
+    lines = fh.readlines()
+    for line in lines:
+        for channel in spec.ROUTING:
+            rex = r'#define *(?P<nuc>\w+) *(?P<channel> %s)' %channel
+            match =re.search(rex, line)
+            if match:
+                line = line.replace(match.group('nuc'), spec.ROUTING[channel])
+        lines2.append(line)
+
+    fh.close()
+    fh = open(bits, 'w')
+    fh.writelines(lines2)
+    fh.close()
+    return
 
 
 class ExpType(object):

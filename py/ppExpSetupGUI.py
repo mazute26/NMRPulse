@@ -9,10 +9,10 @@ import os, sys, re, getopt, datetime
 setup_path = '/opt/topspin3.2pl7/PPlib'
 sys.path.append(os.path.join(setup_path, 'py'))
 
-import ppGlobals as pp
-import ppUtil as ut
-import ppSpect as spec
-import fcalc
+import .ppGlobals as pp
+import .ppUtil as ut
+import .ppSpect as spec
+import .fcalc
 
 from javax.swing import JFrame, JFileChooser, JPanel
 from java.awt import BorderLayout
@@ -265,6 +265,8 @@ def exp_type_chooser(dim, nuclei, expname):
             TC.NEWDATASET([expname, '1', '1', stan_dir], None, 'user/HNCD')
             ut.putcomment('HNCD_2D used as starting parameter set.', 1,
                           ornament=False)
+
+    # TODO: 3D 4D case
 
     TC.RE([expname, '1', '1', stan_dir], 'y')
     ut.putcomment('New Dataset named %s created' % expname, 1, ornament=False)

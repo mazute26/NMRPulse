@@ -5,10 +5,10 @@ import os, sys, re, getopt, datetime
 setup_path = '/Users/mazute26/Documents/PP_SETUP/PPlib'
 sys.path.append(os.path.join(setup_path, 'py' ))
 
-import ppGlobals as pp
-import ppUtil as ut
-import ppSpect as spec
-import fcalc
+import .ppGlobals as pp
+import .ppUtil as ut
+import .ppSpect as spec
+import .fcalc
 try:
     from javax.swing import JFrame, JFileChooser, JPanel
     from java.awt import BorderLayout
@@ -59,7 +59,9 @@ except:
 #         return self.dir_path.rsplit(os.sep, 1)[-1]
 
 def bits_overwrite(bits):
-    """Overwrites the channel definitions in bits.sg"""
+    """Overwrites the channel definitions in bits.sg
+        bits: path to bits.sg file
+    """
     lines2 = []
     fh = open(bits, 'r')
     lines = fh.readlines()
