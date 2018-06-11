@@ -10,9 +10,9 @@ import re
 import getopt
 from optparse import OptionParser
 
-import .ppGlobals as pp
+import ppGlobals as pp
 import .showJcamp as sj
-import .ppUtil as ut
+import ppUtil as ut
 
 # the following hack is necessary, since BRUKER does not add the directories
 #in the user-defined python path to the sys.path

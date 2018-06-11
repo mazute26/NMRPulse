@@ -2,9 +2,9 @@
 """
 
 import os, sys, re, getopt, datetime
-import .ppGlobals as pp
-import .ppUtil as ut
-import .ppSpect as spec
+import ppGlobals as pp
+import ppUtil as ut
+import ppSpect as spec
 import .fcalc
 
 try:

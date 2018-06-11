@@ -5,10 +5,10 @@ import os, sys, re, getopt, datetime
 setup_path = '/Users/mazute26/Documents/PP_SETUP/NMRPulse'
 sys.path.append(os.path.join(setup_path, 'py' ))
 
-import .ppGlobals as pp
-import .ppUtil as ut
-import .ppSpect as spec
-import .fcalc
+import ppGlobals as pp
+import ppUtil as ut
+import ppSpect as spec
+import fcalc
 try:
     from javax.swing import JFrame, JFileChooser, JPanel
     from java.awt import BorderLayout

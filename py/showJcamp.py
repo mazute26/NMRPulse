@@ -7,8 +7,8 @@ import sys
 import re
 import getopt
 
-import .ppGlobals as pp
-import .ppUtil as ut
+import ppGlobals as pp
+import ppUtil as ut
 
 
 # the following hack is necessary, since BRUKER does not add the directories

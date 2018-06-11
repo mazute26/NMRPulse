@@ -5,8 +5,8 @@ import os
 import sys
 import re
 import math as m
-import .ppGlobals as pp
-import .ppSpect as spec
+import ppGlobals as pp
+import ppSpect as spec
 
 try:
     import TopCmds as TC
