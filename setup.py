@@ -59,7 +59,7 @@ for files in os.listdir(os.path.join(PPlib, 'py')):
 
 mess = """
     %s  is used as tospin home directory.
-    %s  is used as PPlib directory.
+    %s  is used as NMRPulse directory.
     """ % (top, PPlib)
 print mess
 #

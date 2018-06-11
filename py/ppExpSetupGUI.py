@@ -12,7 +12,7 @@ sys.path.append(os.path.join(setup_path, 'py'))
 import ppGlobals as pp
 import ppUtil as ut
 import ppSpect as spec
-import .fcalc
+import fcalc
 
 from javax.swing import JFrame, JFileChooser, JPanel
 from java.awt import BorderLayout
@@ -267,7 +267,7 @@ def exp_type_chooser(dim, nuclei, expname):
                           1, ornament=False)
 
     # TODO: 3D 4D case
-    
+
     ut.putcomment('New Dataset named %s created' % expname, 1, ornament=False)
 
 

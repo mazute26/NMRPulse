@@ -73,28 +73,28 @@ PARAMETERS_SET = {
         'HN': 'HN_1D',
         'HCN': None,
         'HCND': None,
-    }
+    },
     '2D':{
         'H': '../standard2D',
         'HC': None,
         'HN': None,
         'HCN': 'HCN_2D',
         'HCND': None,
-    }
+    },
     '3D':{
         'H': None,
         'HC': None,
         'HN': None,
         'HCN': None,
         'HCND': None,
-    }
+    },
     '4D':{
         'H': None,
         'HC': None,
         'HN': None,
         'HCN': None,
         'HCND': None,
-    }
+    },
 }
 
 def get_pulse_power(nuc, pulse, length, nearby=False):

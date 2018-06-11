@@ -5,7 +5,7 @@ import os, sys, re, getopt, datetime
 import ppGlobals as pp
 import ppUtil as ut
 import ppSpect as spec
-import .fcalc
+import fcalc
 
 try:
     import TopCmds as TC

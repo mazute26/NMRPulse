@@ -11,7 +11,7 @@ import getopt
 from optparse import OptionParser
 
 import ppGlobals as pp
-import .showJcamp as sj
+import showJcamp as sj
 import ppUtil as ut
 
 # the following hack is necessary, since BRUKER does not add the directories
