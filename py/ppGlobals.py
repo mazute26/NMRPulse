@@ -13,7 +13,7 @@ run_flag = 'DRY'
 run_flags = ['DRY', 'NORMAL', 'INTERACTIVE', 'FORCE']
 
 topspin_home = '/Users/mazute26/Documents/PP_SETUP/topspinhome'
-setup_path = '/Users/mazute26/Documents/PP_SETUP/PPlib'
+setup_path = '/Users/mazute26/Documents/PP_SETUP/NMRPulse'
 
 input_path = os.path.abspath(setup_path)
 input_path = input_path.replace('/', os.sep)

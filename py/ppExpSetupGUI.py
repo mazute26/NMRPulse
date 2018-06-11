@@ -6,7 +6,7 @@ to the py header in the pp. Jython objects are not included is this doc.
 
 import os, sys, re, getopt, datetime
 
-setup_path = '/opt/topspin3.2pl7/PPlib'
+setup_path = '/Users/mazute26/Documents/PP_SETUP/NMRPulse'
 sys.path.append(os.path.join(setup_path, 'py'))
 
 import .ppGlobals as pp
@@ -234,41 +234,40 @@ def exp_type_chooser(dim, nuclei, expname):
     """
     if dim == 1:
         if nuclei.issubset(pp.hydrogen):
-            ut.load_templt('user/H_1D', expname, stan_dir)
-            ut.putcomment('H_1D used as starting parameter set.', 1,
-                          ornament=False)
+            ut.load_templt(spec.PARAMETERS_SET['1D']['H'], expname, stan_dir)
+            ut.putcomment('%s used as starting parameter set.' % spec.PARAMETERS_SET['1D']['H'],
+                          1, ornament=False)
         elif nuclei.issubset((pp.hydrogen | pp.nitrogen)):
-            TC.NEWDATASET([expname, '1', '1', stan_dir], None, 'user/HN_1D')
-            ut.putcomment('HN_1D used as starting parameter set.', 1,
-                          ornament=False)
+            ut.load_templt(spec.PARAMETERS_SET['1D']['HN'], expname, stan_dir)
+            ut.putcomment('%s used as starting parameter set.' % spec.PARAMETERS_SET['1D']['HN'],
+                          1, ornament=False)
         else:
             pass
 
     elif dim == 2:
         if nuclei.issubset(pp.hydrogen):
-            TC.NEWDATASET([expname, '1', '1', stan_dir], None, 'standard2D')
-            ut.putcomment('standard2D used as starting parameter set.', 1,
-                          ornament=False)
+            ut.load_templt(spec.PARAMETERS_SET['2D']['H'], expname, stan_dir)
+            ut.putcomment('%s used as starting parameter set.' % spec.PARAMETERS_SET['2D']['H'],
+                          1, ornament=False)
         elif nuclei.issubset((pp.hydrogen | pp.nitrogen)):
-            TC.NEWDATASET([expname, '1', '1', stan_dir], None, 'HN')
-            ut.putcomment('HN_2D used as starting parameter set.', 1,
-                          ornament=False)
+            ut.load_templt(spec.PARAMETERS_SET['2D']['HN'], expname, stan_dir)
+            ut.putcomment('%s used as starting parameter set.' % spec.PARAMETERS_SET['2D']['HN'],
+                          1, ornament=False)
         elif nuclei.issubset((pp.hydrogen | pp.carbon)):
-            TC.NEWDATASET([expname, '1', '1', stan_dir], None, 'HC')
-            ut.putcomment('HC_2D used as starting parameter set.', 1,
-                          ornament=False)
+            ut.load_templt(spec.PARAMETERS_SET['2D']['HC'], expname, stan_dir)
+            ut.putcomment('%s used as starting parameter set.' % spec.PARAMETERS_SET['2D']['HC'],
+                          1, ornament=False)
         elif nuclei.issubset((pp.hydrogen | pp.carbon | pp.nitrogen)):
-            ut.load_templt('user/HNC_2D', expname, stan_dir)
-            ut.putcomment('HNC_2D used as starting parameter set.', 1,
-                          ornament=False)
+            ut.load_templt(spec.PARAMETERS_SET['2D']['HCN'], expname, stan_dir)
+            ut.putcomment('%s used as starting parameter set.' % spec.PARAMETERS_SET['2D']['HCN'],
+                          1, ornament=False)
         elif nuclei.issubset(pp.nuclei):
-            TC.NEWDATASET([expname, '1', '1', stan_dir], None, 'user/HNCD')
-            ut.putcomment('HNCD_2D used as starting parameter set.', 1,
-                          ornament=False)
+            ut.load_templt(spec.PARAMETERS_SET['2D']['HCND'], expname, stan_dir)
+            ut.putcomment('%s used as starting parameter set.' % spec.PARAMETERS_SET['2D']['HCND'],
+                          1, ornament=False)
 
     # TODO: 3D 4D case
-
-    TC.RE([expname, '1', '1', stan_dir], 'y')
+    
     ut.putcomment('New Dataset named %s created' % expname, 1, ornament=False)
 
 

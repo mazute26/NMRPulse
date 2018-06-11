@@ -66,6 +66,36 @@ for nuc in PULSE_POWER:
             pp.append((float(l[0]), float(l[1])))
         PULSE_POWER[nuc][pulse] = sorted(pp, key=lambda tup: tup[0])
 
+PARAMETERS_SET = {
+    '1D':{
+        'H': 'H_1D',
+        'HC': None,
+        'HN': 'HN_1D',
+        'HCN': None,
+        'HCND': None,
+    }
+    '2D':{
+        'H': '../standard2D',
+        'HC': None,
+        'HN': None,
+        'HCN': 'HCN_2D',
+        'HCND': None,
+    }
+    '3D':{
+        'H': None,
+        'HC': None,
+        'HN': None,
+        'HCN': None,
+        'HCND': None,
+    }
+    '4D':{
+        'H': None,
+        'HC': None,
+        'HN': None,
+        'HCN': None,
+        'HCND': None,
+    }
+}
 
 def get_pulse_power(nuc, pulse, length, nearby=False):
     """ Calculates pulse power based on spectrometer calibration set in

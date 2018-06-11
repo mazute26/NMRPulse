@@ -13,7 +13,7 @@ try:
 except ImportError:
     print 'TopCmds.py not found'
 
-setup_path = '/opt/topspin3.2pl7/PPlib'
+setup_path = '/Users/mazute26/Documents/PP_SETUP/NMRPulse'
 sys.path.append(os.path.join(setup_path, 'py'))
 
 
