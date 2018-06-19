@@ -10,7 +10,7 @@ import ppSpect as spec
 
 try:
     import TopCmds as TC
-except ImportError:
+except:
     print 'TopCmds.py not found'
 
 setup_path = '/Users/mazute26/Documents/PP_SETUP/NMRPulse'

@@ -386,7 +386,7 @@ def main():
     ut.putcomment('Got %s from GUI' % ppname, 1, ornament=False)
 
     pp.verbose_level = 0
-    pp.run_flag = 'DRY'
+    pp.run_flag = 'NORMAL'
 
     # Parse input arguments
     setopts, args = getopt.gnu_getopt(sys.argv[1:], 'ahr:v:')
