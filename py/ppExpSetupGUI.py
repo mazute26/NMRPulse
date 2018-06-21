@@ -225,7 +225,7 @@ class ExpType(object):
 
 def exp_type_chooser(dim, nuclei, expname):
     """Find the appropriate parameter set based on the dimension and nuclei used
-    in the pulse program. This paramter set is then set as the current data set.
+    in the pulse program. This parameter set is then set as the current data set.
 
     Args:
         dim (int): Dimension of the pulse program
@@ -241,8 +241,18 @@ def exp_type_chooser(dim, nuclei, expname):
             ut.load_templt(spec.PARAMETERS_SET['1D']['HN'], expname, stan_dir)
             ut.putcomment('%s used as starting parameter set.' % spec.PARAMETERS_SET['1D']['HN'],
                           1, ornament=False)
-        else:
-            pass
+        elif nuclei.issubset((pp.hydrogen | pp.carbon)):
+            ut.load_templt(spec.PARAMETERS_SET['1D']['HC'], expname, stan_dir)
+            ut.putcomment('%s used as starting parameter set.' % spec.PARAMETERS_SET['1D']['HC'],
+                          1, ornament=False)
+        elif nuclei.issubset((pp.hydrogen | pp.carbon | pp.nitrogen)):
+            ut.load_templt(spec.PARAMETERS_SET['1D']['HCN'], expname, stan_dir)
+            ut.putcomment('%s used as starting parameter set.' % spec.PARAMETERS_SET['1D']['HCN'],
+                          1, ornament=False)
+        elif nuclei.issubset(pp.nuclei):
+            ut.load_templt(spec.PARAMETERS_SET['1D']['HCND'], expname, stan_dir)
+            ut.putcomment('%s used as starting parameter set.' % spec.PARAMETERS_SET['1D']['HCND'],
+                          1, ornament=False)
 
     elif dim == 2:
         if nuclei.issubset(pp.hydrogen):
@@ -266,7 +276,50 @@ def exp_type_chooser(dim, nuclei, expname):
             ut.putcomment('%s used as starting parameter set.' % spec.PARAMETERS_SET['2D']['HCND'],
                           1, ornament=False)
 
-    # TODO: 3D 4D case
+        elif dim == 3:
+            if nuclei.issubset(pp.hydrogen):
+                ut.load_templt(spec.PARAMETERS_SET['3D']['H'], expname, stan_dir)
+                ut.putcomment('%s used as starting parameter set.' % spec.PARAMETERS_SET['3D']['H'],
+                              1, ornament=False)
+            elif nuclei.issubset((pp.hydrogen | pp.nitrogen)):
+                ut.load_templt(spec.PARAMETERS_SET['3D']['HN'], expname, stan_dir)
+                ut.putcomment('%s used as starting parameter set.' % spec.PARAMETERS_SET['3D']['HN'],
+                              1, ornament=False)
+            elif nuclei.issubset((pp.hydrogen | pp.carbon)):
+                ut.load_templt(spec.PARAMETERS_SET['3D']['HC'], expname, stan_dir)
+                ut.putcomment('%s used as starting parameter set.' % spec.PARAMETERS_SET['3D']['HC'],
+                              1, ornament=False)
+            elif nuclei.issubset((pp.hydrogen | pp.carbon | pp.nitrogen)):
+                ut.load_templt(spec.PARAMETERS_SET['3D']['HCN'], expname, stan_dir)
+                ut.putcomment('%s used as starting parameter set.' % spec.PARAMETERS_SET['3D']['HCN'],
+                              1, ornament=False)
+            elif nuclei.issubset(pp.nuclei):
+                ut.load_templt(spec.PARAMETERS_SET['3D']['HCND'], expname, stan_dir)
+                ut.putcomment('%s used as starting parameter set.' % spec.PARAMETERS_SET['3D']['HCND'],
+                              1, ornament=False)
+
+        elif dim == 4:
+            if nuclei.issubset(pp.hydrogen):
+                ut.load_templt(spec.PARAMETERS_SET['4D']['H'], expname, stan_dir)
+                ut.putcomment('%s used as starting parameter set.' % spec.PARAMETERS_SET['4D']['H'],
+                              1, ornament=False)
+            elif nuclei.issubset((pp.hydrogen | pp.nitrogen)):
+                ut.load_templt(spec.PARAMETERS_SET['4D']['HN'], expname, stan_dir)
+                ut.putcomment('%s used as starting parameter set.' % spec.PARAMETERS_SET['4D']['HN'],
+                              1, ornament=False)
+            elif nuclei.issubset((pp.hydrogen | pp.carbon)):
+                ut.load_templt(spec.PARAMETERS_SET['4D']['HC'], expname, stan_dir)
+                ut.putcomment('%s used as starting parameter set.' % spec.PARAMETERS_SET['4D']['HC'],
+                              1, ornament=False)
+            elif nuclei.issubset((pp.hydrogen | pp.carbon | pp.nitrogen)):
+                ut.load_templt(spec.PARAMETERS_SET['4D']['HCN'], expname, stan_dir)
+                ut.putcomment('%s used as starting parameter set.' % spec.PARAMETERS_SET['4D']['HCN'],
+                              1, ornament=False)
+            elif nuclei.issubset(pp.nuclei):
+                ut.load_templt(spec.PARAMETERS_SET['4D']['HCND'], expname, stan_dir)
+                ut.putcomment('%s used as starting parameter set.' % spec.PARAMETERS_SET['4D']['HCND'],
+                              1, ornament=False)
+
 
     ut.putcomment('New Dataset named %s created' % expname, 1, ornament=False)
 
@@ -367,13 +420,15 @@ def main():
     """
     gui = DirGUI()
     expname = gui.get_dir_name()
-    rex = r'Library/(?P<exp>\w+)/\d+'
+    rex = r'Library/(?P<exp>.+)/\d+'
     rex = rex.replace('/', os.sep)
     match = re.search(rex, pp.addfiles_path)
     if match:
         pp.addfiles_path = pp.addfiles_path.replace(match.group('exp'), expname)
     else:
         ut.putcomment('add_files directory not found', 0, False)
+        warning = " Couldn't find add_files directory in %s folder. The correct directory structre should be NMRPulse/Library/<exp>/<digit>/add_files" % expname
+        raise Exception(warning)
 
     pp_gui = PPGUI()
     ppname = pp_gui.get_pp_name()
