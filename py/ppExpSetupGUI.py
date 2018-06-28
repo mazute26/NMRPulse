@@ -491,7 +491,7 @@ def main():
         raise Exception('No dataset chosen.')
 
     #Overwrite bits.sg to set channel definitions
-    ut.bits_overwrite('pp/user/bits.sg')
+    ut.bits_overwrite(os.path.join(pp.lists_path, 'lists/pp/user/bits.sg'))
 
     # Read pulse programm
     (pythontext, nonpythontext) = ut.split_python_text(ut.read_file(pp.pp_file))
