@@ -20,7 +20,8 @@ from java.io import File
 
 import TopCmds as TC
 
-stan_dir = os.path.join(os.environ['TOPO'], 'data/%s/nmr' % os.getenv("USER"))
+data_dir = '/opt/topspin/data'
+stan_dir = os.path.join(data_dir, '%s/nmr' % os.getenv("USER"))
 stan_dir = stan_dir.replace('/', os.sep)
 
 
@@ -151,6 +152,11 @@ def PP_PUTPAR(name, value):
                     value = value * 1e6
 
         brukername = an + ' ' + ind
+
+        # For other Topspin versions GPNAM 0 is stored as GPNAM0
+        # m1 = re.match('(GPNAM|SPNAM)', an)
+        # if m1:
+        #     brukername = an + ind
 
     pp.pp_log_fd.write('%s: %s\n' % (brukername, str(value)))
     ut.putcomment('PP_PUTPAR: %s %s' % (brukername, str(value)), ornament=False)
@@ -483,6 +489,9 @@ def main():
 
     elif value < 0:
         raise Exception('No dataset chosen.')
+
+    #Overwrite bits.sg to set channel definitions
+    ut.bits_overwrite('pp/user/bits.sg')
 
     # Read pulse programm
     (pythontext, nonpythontext) = ut.split_python_text(ut.read_file(pp.pp_file))

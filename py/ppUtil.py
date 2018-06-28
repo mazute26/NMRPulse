@@ -11,7 +11,7 @@ import ppSpect as spec
 try:
     import TopCmds as TC
 except:
-    print 'TopCmds.py not found'
+    print 'TopCmds.py not found. \n'
 
 setup_path = '/Users/mazute26/Documents/PP_SETUP/NMRPulse'
 sys.path.append(os.path.join(setup_path, 'py'))

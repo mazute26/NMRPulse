@@ -69,9 +69,9 @@ for nuc in PULSE_POWER:
 PARAMETERS_SET = {
     '1D':{
         'H': 'H_1D',
-        'HC': None,
+        'HC': 'HC_1D',
         'HN': 'HN_1D',
-        'HCN': None,
+        'HCN': 'HCN_1D',
         'HCND': None,
     },
     '2D':{
@@ -152,10 +152,10 @@ def plot(lin=True):
 
     plot.scatter(Xdata, Ydata, color='red', label='H.- J.  calibration')
     plot.legend(loc='upper left')
-    plot.show()
+    plt.show()
     return
 
 
 #####       Plot of pulse powers        #####
 if __name__ == '__main__':
-    plot()
+    plot(False)

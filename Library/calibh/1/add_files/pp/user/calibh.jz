@@ -11,7 +11,7 @@ ut.putcomment('DEFINE EXPERIMENT TYPE')
 pp.exp = ut.ExpType(1, ['H'])
 
 ut.putcomment('Set pulse program')
-filename =write_bruker_search_path ('pp', 'calibh.jz’, sourcefile = 'pp/user/calibh.jz' )
+filename =write_bruker_search_path ('pp', 'calibh.jz', sourcefile = 'pp/user/calibh.jz' )
 PUTPARS('PULPROG', filename)
 
 ut.putcomment('Setup Proton')
