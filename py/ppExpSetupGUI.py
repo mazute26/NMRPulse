@@ -1,7 +1,9 @@
 #! /usr/bin/env python
 """
+Is used to set up a NMRPulse experiment.
 This creates a new BRUKER dataset and sets the aquisition parameters according
-to the py header in the pp. Jython objects are not included is this doc.
+to the py header in the pp.
+Jython objects are not included is this doc.
 """
 
 import os, sys, re, getopt, datetime

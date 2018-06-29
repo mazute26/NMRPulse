@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-"""Jcamp file parser
+"""Jcamp file parser.
 """
 
 import os
@@ -50,7 +50,8 @@ def parsearray(ar, li):
     Recursively parses a string ar containing a Bruker array into a list of values.
     The first value is separated from ar and parsed. The recursion restarts with
     the list li appended by the first parsed value and the remainder of ar.
-    Enclosing <> are removed from strings
+    Enclosing <> are removed from strings.
+
     Returns:
         li: list of parsed values
     """
@@ -71,7 +72,8 @@ def parsearray(ar, li):
 def parsebrukervalue(val):
     """
     parses the bruker value (variable name starting with $)
-    decides whether it is an array
+    decides whether it is an array.
+
     Returns:
         (val1, ar)
         ar = (starindex, endindex) for arrays, otherwise None
@@ -94,7 +96,8 @@ def parsebrukervalue(val):
 
 def parseJcamptxt(text):
     """
-    Parses Jcamp text
+    Parses Jcamp text.
+
     Returns:
         (j_dc, u_dc)
         j_dc: dictionary of jcamp-defined variable name, value pairs

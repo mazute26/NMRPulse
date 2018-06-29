@@ -1,8 +1,8 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
-"""This module contains all the globals for pp.
-    This is mostly Bruker parameter definitions and paths.
-    A proper documentation should be written.
+"""
+This module contains all the globals for NMRPulse.
+It contains mostly Bruker parameter definitions and paths.
 """
 
 import os
@@ -77,7 +77,7 @@ parfile_dirs_default_dict = read_parfile_dirs_props(
 
 def many2many_dicts(m2mlist):
     """
-    Mapps obejcts from one list to the other list and vice versa.
+    Maps objects from one list to the other list and vice versa.
 
     Args:
         m2mlist: list of 2lists [list1i, list2i] where list1i, list2i represent

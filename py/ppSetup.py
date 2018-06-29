@@ -1,4 +1,6 @@
-"""This is the module/program which sets the parameters on the spectrometer
+"""This is the module/program which sets the parameters on the spectrometer.
+Is is replaced my ppExpSetupGUI.py which has an additional user interface to set up
+the NMRPulse experiment.
 """
 
 import os, sys, re, getopt, datetime

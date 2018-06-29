@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 """This module contains routines to analyse existing pulse programs together
-with their acquisition data files to make suggestions for programming the used
+with their acquisition data files to make suggestions for setting the used
 parameters in the python header of the new pulse programs.
 """
 

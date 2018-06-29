@@ -1,4 +1,4 @@
-"""This module contains utility routines for the pp project.
+"""This module contains utility routines for the NMRPulse project.
 """
 
 import os
@@ -78,7 +78,8 @@ def cmp_text_file(text, file):
 
 def split_python_text(text):
     """
-    splits first '#ifdef PYTHON_SETUP ... #endif python section from text
+    splits first '#ifdef PYTHON_SETUP ... #endif python section from text.
+
     Returns:
         (pythontext, nonpythontext)
     """
@@ -97,8 +98,10 @@ def find_file_dir(filename, dirs_type, addfiles=False):
     Find file <filename> in search path defined in
     pp.parfile_dirs_dict (addfiles=False) or
     pp.parfile_dirs_default_dict (addfiles=True) under the key <dirs_type>.
+
     Returns:
         (filepath, dirpath)
+
     filepath: absolute path to file name if file exists (else None)
     dirpath: absolute path to first directory in search path to write
     new file
@@ -136,10 +139,12 @@ def find_file_dir(filename, dirs_type, addfiles=False):
 
 
 def flist_to_Bruker_flist(fs):
-    """Converts frequency list to Bruker frequency list
+    """
+    Converts frequency list to Bruker frequency list.
+
     Args:
         fs: List with frequencies in MHz
-    Return:
+    Returns:
         s: Bruker compatible frequency list.
     """
     fo = m.floor(fs[1])
@@ -175,24 +180,15 @@ def putcomment(comment, verbosethreshold=1, ornament=True):
     return
 
 
-def checkSer():
-    [expdir, expnum, procnum, userdir] = TC.CURDATA()
-    isSer = os.path.isfile('%s/%s/%s/ser' % (userdir, expdir, expnum))
-    isFid = os.path.isfile('%s/%s/%s/fid' % (userdir, expdir, expnum))
-
-    if isSer or isFid:
-        warning = TC.SELECT('', 'This experiment number contains data',
-                            ['DONT OVERWRITE', 'OVERWRITE'])
-        print warning
-        if warning is not None:
-            if warning == 0:
-                TC.EXIT()
-        else:
-            TC.EXIT()
-
-
 def load_templt(templt, expname, stan_dir):
-    # checkSer()
+    """
+    Load Topspin parameter set from stand_dir and creates a new dataset.
+
+    Args:
+        templt: Name of topspin parameter set
+        expname: Name of the new dataset
+        stand_dir: Directory from where Topspin stores new data set
+    """
     try:
         TC.NEWDATASET([expname, '1', '1', stan_dir])
         TC.RE([expname, '1', '1', stan_dir], 'y')

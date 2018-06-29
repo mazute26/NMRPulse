@@ -1,5 +1,7 @@
 #! /usr/bin/env python
-
+"""
+Script to try stuff.
+"""
 import os, sys, re, getopt, datetime
 
 setup_path = '/Users/mazute26/Documents/PP_SETUP/NMRPulse'

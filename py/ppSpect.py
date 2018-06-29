@@ -1,5 +1,5 @@
 """This module sets all the spectrometer-specific parameters, such as
-frequencies, pulse powers, etc
+frequencies, pulse powers, etc.
 """
 from math import log10, fabs
 
@@ -123,6 +123,9 @@ def get_pulse_power(nuc, pulse, length, nearby=False):
 
 
 def plot(lin=True):
+    """
+    Plots the pulse calibration to visualy check logarithmic linearity.
+    """
     fig = plt.figure(figsize=(12, 8), dpi=80)
     plot = fig.add_subplot(111)
     plot.set_xlabel('pulse length ['r'$\mu$s]')
