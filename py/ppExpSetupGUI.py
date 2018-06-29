@@ -153,10 +153,11 @@ def PP_PUTPAR(name, value):
 
         brukername = an + ' ' + ind
 
-        # For other Topspin versions GPNAM 0 is stored as GPNAM0
-        # m1 = re.match('(GPNAM|SPNAM)', an)
-        # if m1:
-        #     brukername = an + ind
+        # For certain Topspin versions GPNAM 0 is stored as GPNAM0
+        if spec.TOPSPIN_VERSION == '3.0':
+            m1 = re.match('(GPNAM|SPNAM|CPDPRG)', an)
+            if m1:
+                brukername = an + ind
 
     pp.pp_log_fd.write('%s: %s\n' % (brukername, str(value)))
     ut.putcomment('PP_PUTPAR: %s %s' % (brukername, str(value)), ornament=False)
