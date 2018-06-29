@@ -13,14 +13,14 @@ filename =write_bruker_search_path ('pp', 'calibn.jz', sourcefile = 'pp/user/cal
 PUTPARS('PULPROG', filename)
 
 ut.putcomment('Setup Proton')
-PUTPARS('SFO1', wf)
+PUTPARS(spec.channel['H'], wf)
 
 p1lp = spec.get_pulse_power( 'H1', 'rect', 7.3, nearby = True)
 PUTPARS(('p1', 'pldb1'), p1lp)
 
 ut.putcomment('SETUP NITROGEN')
 f_n = fcalc.p2f_water( 116.5, 'N15', wf, csw )
-PUTPARS('SFO2', f_n)
+PUTPARS(spec.channel['N'], f_n)
 
 p3lp = spec.get_pulse_power( 'N15', 'rect', 200*scale, nearby = True)
 filename = write_bruker_search_path('shape', 'sinc1.0', sourcefile = 'wave/user/sinc1.0')

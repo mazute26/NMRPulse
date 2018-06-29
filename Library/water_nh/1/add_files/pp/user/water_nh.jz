@@ -13,7 +13,7 @@ filename = write_bruker_search_path('pp', 'water_nh.jz', sourcefile = 'pp/user/w
 PUTPARS('PULPROG', filename)
 
 ut.putcomment('SETUP PROTON')
-PUTPARS('SFO1', wf)
+PUTPARS(spec.channel['H'], wf)
 
 p1lp = spec.get_pulse_power ('H1', 'rect', 7.0, nearby = True)
 PUTPARS(('p1', 'pldb1'), p1lp)
@@ -29,7 +29,7 @@ ut.putcomment('SETUP CARBON')
 f_cacb = fcalc.p2f_water(46, 'C13', wf, csw)
 f_ca = fcalc.p2f_water(56, 'C13', wf, csw)
 f_c = fcalc.p2f_water(177, 'C13', wf, csw)
-PUTPARS('SFO3', f_c)
+PUTPARS(spec.channel['C'], f_c)
 
 flist = [f_ca, f_c]
 flist_string = ut.flist_to_Bruker_flist( flist )
@@ -41,7 +41,7 @@ PUTPARS(('p5', 'pldb5'), p5lp)
 
 ut.putcomment(' SETUP NITROGEN')
 f_n = fcalc.p2f_water(116.5, 'N15', wf, csw)
-PUTPARS('SFO2', f_n)
+PUTPARS(spec.channel['N'], f_n)
 
 p7lp = spec.get_pulse_power ('N15', 'rect', 40, nearby=True)
 PUTPARS(('p7', 'pldb7'), p7lp)

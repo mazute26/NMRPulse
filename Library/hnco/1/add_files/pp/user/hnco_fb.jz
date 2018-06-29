@@ -13,7 +13,7 @@ filename = write_bruker_search_path('pp', 'hnco_fb.jz', sourcefile = 'pp/user/hn
 PUTPARS('PULPROG', filename)
 
 ut.putcomment('SETUP PROTON')
-PUTPARS('SFO1', wf)
+PUTPARS(spec.channel['H'], wf)
 
 p1lp = spec.get_pulse_power ('H1', 'rect', 6.45, nearby = True)
 PUTPARS(('p1', 'pldb1'), p1lp)
@@ -33,7 +33,7 @@ ut.putcomment('SETUP CARBON')
 f_ca = fcalc.p2f_water( 56, 'C13', wf, csw)
 f_c = fcalc.p2f_water( 177, 'C13', wf, csw)
 df_c_ca=(f_c-f_ca)*1e6
-PUTPARS('SFO3', f_c)
+PUTPARS(spec.channel['C'], f_c)
 
 p5lp = spec.get_pulse_power('C13', 'rect', 53)
 PUTPARS(('p5','pldb5'), p5lp
@@ -44,7 +44,7 @@ PUTPARS(('p6','spdb3','spnam3','spoffs3'), p6lp + (filename, df_c_ca))
 
 ut.putcomment('SETUP NITROGEN')
 f_n = fcalc.p2f_water( 116.5, 'N15', wf, csw )
-PUTPARS('SFO2', f_n)
+PUTPARS(spec.channel['N'], f_n)
 
 p7lp = spec.get_pulse_power('N15', 'rect', 40, nearby=True)
 PUTPARS(('p7','pldb7'), p7lp)

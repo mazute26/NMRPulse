@@ -15,7 +15,7 @@ filename =write_bruker_search_path ('pp', 'calibh.jz', sourcefile = 'pp/user/cal
 PUTPARS('PULPROG', filename)
 
 ut.putcomment('Setup Proton')
-PUTPARS('SFO1', wf)
+PUTPARS(spec.channel['H'], wf)
 
 p1lp = spec.get_pulse_power( 'H1', 'rect', 6.48, nearby = True)
 PUTPARS(('p1', 'pldb1'), p1lp)

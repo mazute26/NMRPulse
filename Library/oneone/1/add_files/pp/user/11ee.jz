@@ -13,7 +13,7 @@ filename = write_bruker_search_path('pp', '11ee.jz', sourcefile = 'pp/user/11ee.
 PUTPARS('PULPROG', filename)
 
 ut.putcomment('SETUP PROTON')
-PUTPARS('SFO1', wf)
+PUTPARS(spec.channel['H'], wf)
 
 p1lp = spec.get_pulse_power('H1', 'rect', 7.5, nearby = True)
 PUTPARS(('p1', 'pldb1'), p1lp)
@@ -23,7 +23,7 @@ PUTPARS(('p2', 'pldb2'), p2lp)
 
 ut.putcomment('SETUP NITROGEN')
 f_n = fcalc.p2f_water(116.5, 'N15', wf, csw)
-PUTPARS('SFO2', f_n)
+PUTPARS(spec.channel['N'], f_n)
 
 p31lp = spec.get_pulse_power( 'N15', 'rect', 200*scale, nearby = True)
 filename = write_bruker_search_path( 'cpd', 'waltz16.31', sourcefile = 'cpd/user/waltz16.31' )
