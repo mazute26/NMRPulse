@@ -86,30 +86,36 @@ together with the addfilecreatpath.</p>
 </div>
 <div class="section" id="module-py.fcalc">
 <span id="py-fcalc-module"></span><h2>py.fcalc module<a class="headerlink" href="#module-py.fcalc" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the functions to perform frequecy calculations.</p>
 <dl class="function">
 <dt id="py.fcalc.csWater45Me_308K_p">
 <code class="descclassname">py.fcalc.</code><code class="descname">csWater45Me_308K_p</code><span class="sig-paren">(</span><em>p=1</em><span class="sig-paren">)</span><a class="headerlink" href="#py.fcalc.csWater45Me_308K_p" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Calculates chemical shift of Chemical shift of water line in 45% MeOH at 308K according to pressure (Maciej).</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="py.fcalc.cs_water_T">
 <code class="descclassname">py.fcalc.</code><code class="descname">cs_water_T</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#py.fcalc.cs_water_T" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Calculates chemical shift of water based on Temparature.</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="py.fcalc.cs_water_Tp">
 <code class="descclassname">py.fcalc.</code><code class="descname">cs_water_Tp</code><span class="sig-paren">(</span><em>T=298</em>, <em>p=1</em><span class="sig-paren">)</span><a class="headerlink" href="#py.fcalc.cs_water_Tp" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Calculates chemical shift of water based on Temparature and pressure (according to Maciej).</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="py.fcalc.f2p_water">
 <code class="descclassname">py.fcalc.</code><code class="descname">f2p_water</code><span class="sig-paren">(</span><em>freqN</em>, <em>typeN</em>, <em>freqW</em>, <em>csw</em><span class="sig-paren">)</span><a class="headerlink" href="#py.fcalc.f2p_water" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Converts frequecy to ppm.</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="py.fcalc.p2f_water">
 <code class="descclassname">py.fcalc.</code><code class="descname">p2f_water</code><span class="sig-paren">(</span><em>csN</em>, <em>typeN</em>, <em>freqW</em>, <em>csw</em><span class="sig-paren">)</span><a class="headerlink" href="#py.fcalc.p2f_water" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Converts ppm to frequency.</p>
+</dd></dl>
 
 </div>
 <div class="section" id="module-py.p2f">
@@ -123,7 +129,7 @@ together with the addfilecreatpath.</p>
 <div class="section" id="module-py.ppAnalyze">
 <span id="py-ppanalyze-module"></span><h2>py.ppAnalyze module<a class="headerlink" href="#module-py.ppAnalyze" title="Permalink to this headline">¶</a></h2>
 <p>This module contains routines to analyse existing pulse programs together
-with their acquisition data files to make suggestions for programming the used
+with their acquisition data files to make suggestions for setting the used
 parameters in the python header of the new pulse programs.</p>
 <dl class="function">
 <dt id="py.ppAnalyze.analyzepp">
@@ -140,8 +146,10 @@ Outputs the acquisition parameters and their value.</p>
 </div>
 <div class="section" id="module-py.ppExpSetupGUI">
 <span id="py-ppexpsetupgui-module"></span><h2>py.ppExpSetupGUI module<a class="headerlink" href="#module-py.ppExpSetupGUI" title="Permalink to this headline">¶</a></h2>
-<p>This creates a new BRUKER dataset and sets the aquisition parameters according
-to the py header in the pp. Jython objects are not included is this doc.</p>
+<p>Is used to set up a NMRPulse experiment.
+This creates a new BRUKER dataset and sets the aquisition parameters according
+to the py header in the pp.
+Jython objects are not included is this doc.</p>
 <dl class="class">
 <dt id="py.ppExpSetupGUI.ExpType">
 <em class="property">class </em><code class="descclassname">py.ppExpSetupGUI.</code><code class="descname">ExpType</code><span class="sig-paren">(</span><em>dimension</em>, <em>nuclei</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppExpSetupGUI.ExpType" title="Permalink to this definition">¶</a></dt>
@@ -176,7 +184,7 @@ value: value of the parameter</dd>
 
 <dl class="function">
 <dt id="py.ppExpSetupGUI.check_if_dataset">
-<code class="descclassname">py.ppExpSetupGUI.</code><code class="descname">check_if_dataset</code><span class="sig-paren">(</span><em>expname</em>, <em>dataset_dir='TOP'</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppExpSetupGUI.check_if_dataset" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">py.ppExpSetupGUI.</code><code class="descname">check_if_dataset</code><span class="sig-paren">(</span><em>expname</em>, <em>dataset_dir='/opt/topspin/data/mazute26/nmr'</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppExpSetupGUI.check_if_dataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Goes trough dataset_dir and checks if a experiment directory named
 expname already exists.</p>
 <dl class="docutils">
@@ -192,7 +200,7 @@ dataset_dir: directory of experiements ($TOPO)</dd>
 <dt id="py.ppExpSetupGUI.exp_type_chooser">
 <code class="descclassname">py.ppExpSetupGUI.</code><code class="descname">exp_type_chooser</code><span class="sig-paren">(</span><em>dim</em>, <em>nuclei</em>, <em>expname</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppExpSetupGUI.exp_type_chooser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find the appropriate parameter set based on the dimension and nuclei used
-in the pulse program. This paramter set is then set as the current data set.</p>
+in the pulse program. This parameter set is then set as the current data set.</p>
 <dl class="docutils">
 <dt>Args:</dt>
 <dd>dim (int): Dimension of the pulse program
@@ -203,7 +211,7 @@ expname (str): name of the new dataset</dd>
 
 <dl class="function">
 <dt id="py.ppExpSetupGUI.get_highest_expno">
-<code class="descclassname">py.ppExpSetupGUI.</code><code class="descname">get_highest_expno</code><span class="sig-paren">(</span><em>expname</em>, <em>dataset_dir='TOP'</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppExpSetupGUI.get_highest_expno" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">py.ppExpSetupGUI.</code><code class="descname">get_highest_expno</code><span class="sig-paren">(</span><em>expname</em>, <em>dataset_dir='/opt/topspin/data/mazute26/nmr'</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppExpSetupGUI.get_highest_expno" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the highstes expno of a given experiment expname.</p>
 <dl class="docutils">
 <dt>Args:</dt>
@@ -217,7 +225,7 @@ dataset_dir: directory of experiements ($TOPO)</dd>
 <dl class="function">
 <dt id="py.ppExpSetupGUI.main">
 <code class="descclassname">py.ppExpSetupGUI.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#py.ppExpSetupGUI.main" title="Permalink to this definition">¶</a></dt>
-<dd><p>Executeable to setup an experiment in topspin from iPulse.
+<dd><p>Execute to setup an experiment in topspin from Library.
 1. GUI to select experiment
 2. GUI to select pp
 3. Window asking to use current dataset or not
@@ -269,13 +277,12 @@ Exception: unequal source and destination file. Will not overwrite in
 </div>
 <div class="section" id="module-py.ppGlobals">
 <span id="py-ppglobals-module"></span><h2>py.ppGlobals module<a class="headerlink" href="#module-py.ppGlobals" title="Permalink to this headline">¶</a></h2>
-<p>This module contains all the globals for pp.
-This is mostly Bruker parameter definitions and paths.
-A proper documentation should be written.</p>
+<p>This module contains all the globals for NMRPulse.
+It contains mostly Bruker parameter definitions and paths.</p>
 <dl class="function">
 <dt id="py.ppGlobals.many2many_dicts">
 <code class="descclassname">py.ppGlobals.</code><code class="descname">many2many_dicts</code><span class="sig-paren">(</span><em>m2mlist</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppGlobals.many2many_dicts" title="Permalink to this definition">¶</a></dt>
-<dd><p>Mapps obejcts from one list to the other list and vice versa.</p>
+<dd><p>Maps objects from one list to the other list and vice versa.</p>
 <dl class="docutils">
 <dt>Args:</dt>
 <dd>m2mlist: list of 2lists [list1i, list2i] where list1i, list2i represent
@@ -303,7 +310,9 @@ E.g. {‘PY_DIRS’: [‘py/user’, ‘py’]}</dd>
 </div>
 <div class="section" id="module-py.ppSetup">
 <span id="py-ppsetup-module"></span><h2>py.ppSetup module<a class="headerlink" href="#module-py.ppSetup" title="Permalink to this headline">¶</a></h2>
-<p>This is the module/program which sets the parameters on the spectrometer</p>
+<p>This is the module/program which sets the parameters on the spectrometer.
+Is is replaced my ppExpSetupGUI.py which has an additional user interface to set up
+the NMRPulse experiment.</p>
 <dl class="class">
 <dt id="py.ppSetup.ExpType">
 <em class="property">class </em><code class="descclassname">py.ppSetup.</code><code class="descname">ExpType</code><span class="sig-paren">(</span><em>dimension</em>, <em>nuclei</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppSetup.ExpType" title="Permalink to this definition">¶</a></dt>
@@ -356,7 +365,7 @@ ftype = cpd, f1, gp, … with checks for overwrite, identity, etc.</p>
 <div class="section" id="module-py.ppSpect">
 <span id="py-ppspect-module"></span><h2>py.ppSpect module<a class="headerlink" href="#module-py.ppSpect" title="Permalink to this headline">¶</a></h2>
 <p>This module sets all the spectrometer-specific parameters, such as
-frequencies, pulse powers, etc</p>
+frequencies, pulse powers, etc.</p>
 <dl class="function">
 <dt id="py.ppSpect.get_pulse_power">
 <code class="descclassname">py.ppSpect.</code><code class="descname">get_pulse_power</code><span class="sig-paren">(</span><em>nuc</em>, <em>pulse</em>, <em>length</em>, <em>nearby=False</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppSpect.get_pulse_power" title="Permalink to this definition">¶</a></dt>
@@ -376,12 +385,13 @@ Otherwise the pulse power is extrapolated from the closest value.</dd>
 <dl class="function">
 <dt id="py.ppSpect.plot">
 <code class="descclassname">py.ppSpect.</code><code class="descname">plot</code><span class="sig-paren">(</span><em>lin=True</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppSpect.plot" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Plots the pulse calibration to visualy check logarithmic linearity.</p>
+</dd></dl>
 
 </div>
 <div class="section" id="module-py.ppUtil">
 <span id="py-pputil-module"></span><h2>py.ppUtil module<a class="headerlink" href="#module-py.ppUtil" title="Permalink to this headline">¶</a></h2>
-<p>This module contains utility routines for the pp project.</p>
+<p>This module contains utility routines for the NMRPulse project.</p>
 <dl class="class">
 <dt id="py.ppUtil.ExpType">
 <em class="property">class </em><code class="descclassname">py.ppUtil.</code><code class="descname">ExpType</code><span class="sig-paren">(</span><em>dimension</em>, <em>nuclei</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppUtil.ExpType" title="Permalink to this definition">¶</a></dt>
@@ -395,16 +405,18 @@ nuc (set): Set of used nuclei channels</dd>
 </dd></dl>
 
 <dl class="function">
+<dt id="py.ppUtil.bits_overwrite">
+<code class="descclassname">py.ppUtil.</code><code class="descname">bits_overwrite</code><span class="sig-paren">(</span><em>bits</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppUtil.bits_overwrite" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overwrites the channel definitions in bits.sg
+bits: path to bits.sg file</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="py.ppUtil.cd_curd">
 <code class="descclassname">py.ppUtil.</code><code class="descname">cd_curd</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#py.ppUtil.cd_curd" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check whether this is in topspin environment.
 In this case, change to current data set. Else do nothing.</p>
 </dd></dl>
-
-<dl class="function">
-<dt id="py.ppUtil.checkSer">
-<code class="descclassname">py.ppUtil.</code><code class="descname">checkSer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#py.ppUtil.checkSer" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="function">
 <dt id="py.ppUtil.cmp_text_file">
@@ -417,10 +429,11 @@ In this case, change to current data set. Else do nothing.</p>
 <code class="descclassname">py.ppUtil.</code><code class="descname">find_file_dir</code><span class="sig-paren">(</span><em>filename</em>, <em>dirs_type</em>, <em>addfiles=False</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppUtil.find_file_dir" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find file &lt;filename&gt; in search path defined in
 pp.parfile_dirs_dict (addfiles=False) or
-pp.parfile_dirs_default_dict (addfiles=True) under the key &lt;dirs_type&gt;.
-Returns:</p>
-<blockquote>
-<div>(filepath, dirpath)</div></blockquote>
+pp.parfile_dirs_default_dict (addfiles=True) under the key &lt;dirs_type&gt;.</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>(filepath, dirpath)</dd>
+</dl>
 <p>filepath: absolute path to file name if file exists (else None)
 dirpath: absolute path to first directory in search path to write
 new file</p>
@@ -429,12 +442,11 @@ new file</p>
 <dl class="function">
 <dt id="py.ppUtil.flist_to_Bruker_flist">
 <code class="descclassname">py.ppUtil.</code><code class="descname">flist_to_Bruker_flist</code><span class="sig-paren">(</span><em>fs</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppUtil.flist_to_Bruker_flist" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts frequency list to Bruker frequency list
-Args:</p>
-<blockquote>
-<div>fs: List with frequencies in MHz</div></blockquote>
+<dd><p>Converts frequency list to Bruker frequency list.</p>
 <dl class="docutils">
-<dt>Return:</dt>
+<dt>Args:</dt>
+<dd>fs: List with frequencies in MHz</dd>
+<dt>Returns:</dt>
 <dd>s: Bruker compatible frequency list.</dd>
 </dl>
 </dd></dl>
@@ -442,7 +454,14 @@ Args:</p>
 <dl class="function">
 <dt id="py.ppUtil.load_templt">
 <code class="descclassname">py.ppUtil.</code><code class="descname">load_templt</code><span class="sig-paren">(</span><em>templt</em>, <em>expname</em>, <em>stan_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppUtil.load_templt" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Load Topspin parameter set from stand_dir and creates a new dataset.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>templt: Name of topspin parameter set
+expname: Name of the new dataset
+stand_dir: Directory from where Topspin stores new data set</dd>
+</dl>
+</dd></dl>
 
 <dl class="function">
 <dt id="py.ppUtil.merge_dicts">
@@ -476,10 +495,11 @@ with ornament (ornament = True)</p>
 <dl class="function">
 <dt id="py.ppUtil.split_python_text">
 <code class="descclassname">py.ppUtil.</code><code class="descname">split_python_text</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="headerlink" href="#py.ppUtil.split_python_text" title="Permalink to this definition">¶</a></dt>
-<dd><p>splits first ‘#ifdef PYTHON_SETUP … #endif python section from text
-Returns:</p>
-<blockquote>
-<div>(pythontext, nonpythontext)</div></blockquote>
+<dd><p>splits first ‘#ifdef PYTHON_SETUP … #endif python section from text.</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>(pythontext, nonpythontext)</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -497,7 +517,7 @@ Returns:</p>
 </div>
 <div class="section" id="module-py.showJcamp">
 <span id="py-showjcamp-module"></span><h2>py.showJcamp module<a class="headerlink" href="#module-py.showJcamp" title="Permalink to this headline">¶</a></h2>
-<p>Jcamp file parser</p>
+<p>Jcamp file parser.</p>
 <dl class="function">
 <dt id="py.showJcamp.is_Jcamp">
 <code class="descclassname">py.showJcamp.</code><code class="descname">is_Jcamp</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#py.showJcamp.is_Jcamp" title="Permalink to this definition">¶</a></dt>
@@ -512,17 +532,18 @@ Returns:</p>
 <dl class="function">
 <dt id="py.showJcamp.parseJcamptxt">
 <code class="descclassname">py.showJcamp.</code><code class="descname">parseJcamptxt</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="headerlink" href="#py.showJcamp.parseJcamptxt" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parses Jcamp text
-Returns:</p>
-<blockquote>
-<div>(j_dc, u_dc)
+<dd><p>Parses Jcamp text.</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>(j_dc, u_dc)
 j_dc: dictionary of jcamp-defined variable name, value pairs
 (see McDonald, R. S.; Wilks, P. A. Appl. Spectrosc., AS 1988, 42 (1), 151.)
 u_dc: dictionary of user-defined variable name, value pairs,
 The variable names start with a $-sign, which is removed. If the value
 is an array, it is parsed using Bruker convention and returned as a list.
 The array start and end indices are stored as tuples into a
-subdictionnary $ARRAY under the array name.</div></blockquote>
+subdictionnary $ARRAY under the array name.</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -531,24 +552,26 @@ subdictionnary $ARRAY under the array name.</div></blockquote>
 <dd><p>Recursively parses a string ar containing a Bruker array into a list of values.
 The first value is separated from ar and parsed. The recursion restarts with
 the list li appended by the first parsed value and the remainder of ar.
-Enclosing &lt;&gt; are removed from strings
-Returns:</p>
-<blockquote>
-<div>li: list of parsed values</div></blockquote>
+Enclosing &lt;&gt; are removed from strings.</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>li: list of parsed values</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="py.showJcamp.parsebrukervalue">
 <code class="descclassname">py.showJcamp.</code><code class="descname">parsebrukervalue</code><span class="sig-paren">(</span><em>val</em><span class="sig-paren">)</span><a class="headerlink" href="#py.showJcamp.parsebrukervalue" title="Permalink to this definition">¶</a></dt>
 <dd><p>parses the bruker value (variable name starting with $)
-decides whether it is an array
-Returns:</p>
-<blockquote>
-<div>(val1, ar)
+decides whether it is an array.</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>(val1, ar)
 ar = (starindex, endindex) for arrays, otherwise None
 val = list of values for arrays, otherwise single value
 values are converted to int, float, or str.
-Enclosing &lt;&gt; are removed from strings.</div></blockquote>
+Enclosing &lt;&gt; are removed from strings.</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -591,10 +614,12 @@ par_i: single_parameter_name | parameter_array_name | parameter_array_name array
 </div>
 <div class="section" id="module-py.test">
 <span id="py-test-module"></span><h2>py.test module<a class="headerlink" href="#module-py.test" title="Permalink to this headline">¶</a></h2>
+<p>Script to try stuff.</p>
 <dl class="function">
 <dt id="py.test.bits_overwrite">
 <code class="descclassname">py.test.</code><code class="descname">bits_overwrite</code><span class="sig-paren">(</span><em>bits</em><span class="sig-paren">)</span><a class="headerlink" href="#py.test.bits_overwrite" title="Permalink to this definition">¶</a></dt>
-<dd><p>Overwrites the channel definitions in bits.sg</p>
+<dd><p>Overwrites the channel definitions in bits.sg
+bits: path to bits.sg file</p>
 </dd></dl>
 
 </div>
