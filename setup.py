@@ -1,5 +1,8 @@
 #! /usr/bin/env python
 """This macro is used to setup the NMRPulse project.
+It sets the Topspin path to the Python scripts and vice versa by changing the
+first lines of the script and the parfile-dirs.propself. Further bits.sg is
+added to the Topspin pp directory.
 """
 
 import os
