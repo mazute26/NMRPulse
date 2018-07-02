@@ -24,6 +24,7 @@ import TopCmds as TC
 
 data_dir = '/opt/topspin/data'
 stan_dir = os.path.join(data_dir, '%s/nmr' % os.getenv("USER"))
+# stan_dir = os.path.join(os.environ['TOPO'], 'data/%s/nmr' % os.getenv("USER"))
 stan_dir = stan_dir.replace('/', os.sep)
 
 
