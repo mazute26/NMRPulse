@@ -16,6 +16,7 @@ ROUTING = {'f1': 'H', 'f2': 'N', 'f3': 'C1', 'f4': 'D'}  # Enter frequecy channe
 channel = {}
 for (k,v) in ROUTING.items():
     channel[v[0]]= 'SFO'+ k[-1]
+    
 TOPSPIN_VERSION = '3.2'  # 700 and chemistry 600 have 3.0 -> caused the GPNAM issue
 
 PULSE_POWER = {
