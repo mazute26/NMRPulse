@@ -13,8 +13,9 @@ except:
 WATER_FREQUENCY = 600.13281495  # in MHz
 
 ROUTING = {'f1': 'H', 'f2': 'N', 'f3': 'C1', 'f4': 'D'}  # Enter frequecy channeling here
-channel = {v[0]:('SFO'+k[-1]) for (k,v) in ROUTING.items()}
-
+channel = {}
+for (k,v) in ROUTING.items():
+    channel[v[0]]= 'SFO'+ k[-1]
 TOPSPIN_VERSION = '3.2'  # 700 and chemistry 600 have 3.0 -> caused the GPNAM issue
 
 PULSE_POWER = {
